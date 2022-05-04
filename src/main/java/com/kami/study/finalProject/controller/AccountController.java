@@ -1,0 +1,28 @@
+package com.kami.study.finalProject.controller;
+
+import com.kami.study.finalProject.DTO.account.AccountRequest;
+import com.kami.study.finalProject.DTO.account.AccountResponse;
+import com.kami.study.finalProject.mapper.AccountMapper;
+import com.kami.study.finalProject.security.UserPrincipal;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+@RestController
+@RequestMapping("/api/v1/account/")
+@RequiredArgsConstructor
+public class AccountController {
+
+    private final AccountMapper accountMapper;
+
+    @PostMapping("/new")
+    public ResponseEntity<AccountResponse> createNewAccount(/*@AuthenticationPrincipal UserPrincipal user,*/
+                                                            @Valid @RequestBody AccountRequest accountRequest,
+                                                            BindingResult bindingResult) {
+        return ResponseEntity.ok(accountMapper.create(accountRequest, bindingResult));
+    }
+}

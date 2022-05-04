@@ -1,8 +1,8 @@
-package com.kami.study.finalProject.controller.userEntity;
+package com.kami.study.finalProject.controller;
 
-import com.kami.study.finalProject.model.user.User;
-import com.kami.study.finalProject.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.kami.study.finalProject.model.User;
+import com.kami.study.finalProject.service.persistence.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +15,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/user")
-public class UserEntityController {
+@RequiredArgsConstructor
+public class UserController {
     final UserService service;
-
-    @Autowired
-    public UserEntityController(UserService service) {
-        this.service = service;
-    }
 
     @GetMapping
     public ResponseEntity<User> getById(@RequestBody Long id) {
@@ -29,6 +25,11 @@ public class UserEntityController {
         return optionalUser
                 .map(user -> new ResponseEntity<>(user, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return new ResponseEntity<>("Hello!", HttpStatus.OK);
     }
 
     @GetMapping("/admin/all")
