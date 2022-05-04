@@ -1,7 +1,8 @@
 package com.kami.study.finalProject.security;
 
+import com.kami.study.finalProject.exception.JwtAuthenticationException;
 import io.jsonwebtoken.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
@@ -18,6 +19,7 @@ import java.util.Base64;
 import java.util.Date;
 
 @Component
+@RequiredArgsConstructor
 public class JwtProvider {
 
     @Qualifier("userDetailsServiceImpl") @Lazy
@@ -31,11 +33,6 @@ public class JwtProvider {
 
     @Value("${jwt.expiration}")
     private long validityInMilliseconds;
-
-    @Autowired
-    public JwtProvider(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
 
     @PostConstruct
     protected void init() {

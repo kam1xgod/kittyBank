@@ -1,28 +1,27 @@
 package com.kami.study.finalProject.security;
 
-import com.kami.study.finalProject.model.user.User;
+import com.kami.study.finalProject.model.User;
 import com.kami.study.finalProject.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service("userDetailsServiceImpl")
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository repository;
 
-    @Autowired
-    public UserDetailsServiceImpl(UserRepository repository) {
-        this.repository = repository;
-    }
-
     @Override
-    public UserDetails loadUserByUsername(String phoneNumber) throws UsernameNotFoundException {
-        User user = repository.findByPhoneNumber(phoneNumber).orElseThrow(() -> new UsernameNotFoundException(String.format("User with {%s} phone number not found", phoneNumber)));
+    public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
+        User user = repository.findByMail(mail)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("User with {%s} email not found", mail)));
+        if (user.getActivationCode() != null) {
+            throw new LockedException("Email not activated.");
+        }
         return UserPrincipal.create(user);
     }
 }

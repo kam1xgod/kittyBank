@@ -1,6 +1,7 @@
 package com.kami.study.finalProject.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.kami.study.finalProject.exception.JwtAuthenticationException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -15,14 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+@RequiredArgsConstructor
 public class JwtFilter extends GenericFilterBean {
 
     private final JwtProvider provider;
-
-    @Autowired
-    public JwtFilter(JwtProvider provider) {
-        this.provider = provider;
-    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

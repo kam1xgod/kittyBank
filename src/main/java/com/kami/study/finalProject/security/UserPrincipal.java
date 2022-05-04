@@ -1,6 +1,6 @@
 package com.kami.study.finalProject.security;
 
-import com.kami.study.finalProject.model.user.User;
+import com.kami.study.finalProject.model.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class UserPrincipal implements UserDetails, OAuth2User {
 
     private final Long id;
-    private final String phoneNumber;
+    private final String mail;
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
     private Map<String, Object> attributes;
@@ -24,7 +24,7 @@ public class UserPrincipal implements UserDetails, OAuth2User {
     public static UserPrincipal create(User user) {
         String userRole = user.getRole().toString();
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(userRole));
-        return new UserPrincipal(user.getId(), user.getPhoneNumber(), user.getPassword(), authorities);
+        return new UserPrincipal(user.getId(), user.getMail(), user.getPassword(), authorities);
     }
 
     public static UserPrincipal create(User user, Map<String, Object> attributes) {
@@ -50,7 +50,7 @@ public class UserPrincipal implements UserDetails, OAuth2User {
 
     @Override
     public String getUsername() {
-        return phoneNumber;
+        return mail;
     }
 
     @Override
@@ -75,6 +75,6 @@ public class UserPrincipal implements UserDetails, OAuth2User {
 
     @Override
     public String getName() {
-        return phoneNumber;
+        return mail;
     }
 }
