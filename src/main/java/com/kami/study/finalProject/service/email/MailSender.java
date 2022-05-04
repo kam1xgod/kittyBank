@@ -1,6 +1,8 @@
 package com.kami.study.finalProject.service.email;
 
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,16 +16,12 @@ import javax.mail.internet.MimeMessage;
 import java.util.Map;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class MailSender {
 
     private final JavaMailSender sender;
     private final SpringTemplateEngine thymeleafTemplateEngine;
-
-    @Autowired
-    public MailSender(JavaMailSender sender, SpringTemplateEngine thymeleafTemplateEngine) {
-        this.sender = sender;
-        this.thymeleafTemplateEngine = thymeleafTemplateEngine;
-    }
 
     @Value("${spring.mail.username}")
     private String username;
