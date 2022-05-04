@@ -1,6 +1,6 @@
 package com.kami.study.finalProject.model.enums;
 
-public enum UserRole {
-    USER,
-    ADMIN
+public enum CardType {
+    CREDIT,
+    DEBIT
 }
