@@ -1,4 +1,4 @@
-package com.kami.study.finalProject.security;
+package com.kami.study.finalProject.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
