@@ -1,7 +1,7 @@
 package com.kami.study.finalProject.DTO.user;
 
 import com.kami.study.finalProject.DTO.passport.PassportResponse;
-import com.kami.study.finalProject.model.enums.UserRole;
+import com.kami.study.finalProject.model.enums.Role;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -14,7 +14,7 @@ public class UserRequest {
     private final String lastname;
     private final Short age;
     private final PassportResponse passport;
-    private final UserRole role;
-    private final String phoneNumber;
+    private final Role role;
     private final String password;
+    private final String mail;
 }
