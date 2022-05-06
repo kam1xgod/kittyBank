@@ -19,6 +19,6 @@ public interface TransferRepository extends JpaRepository<Transfer, Long> {
 
     List<Transfer> getTransfersByRecipient(Account recipient);
 
-    @Query("select t from Transfer t join Account a on t.recipient.id = a.id or t.sender.id = a.id where a.id = ?1")
+    @Query("select t from Transfer t where t.recipient.id = ?1 or t.sender.id = ?1")
     List<Transfer> getTransfersByAccountId(Long accountId);
 }

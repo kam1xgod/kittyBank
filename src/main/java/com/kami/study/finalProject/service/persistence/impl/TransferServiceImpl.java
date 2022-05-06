@@ -48,7 +48,7 @@ public class TransferServiceImpl implements TransferService {
     @Override
     public List<Transfer> delete(Transfer object) {
         transferRepository.delete(object);
-        return transferRepository.findAll();
+        return findAll();
     }
 
     @Override

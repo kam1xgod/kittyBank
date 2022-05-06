@@ -42,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<Account> delete(Account account) {
         accountRepository.delete(account);
-        return accountRepository.findAll();
+        return findAll();
     }
 
     @Override
@@ -78,7 +78,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account findByAccountNumber(String number) {
-        return accountRepository.findByNumber(number).orElseThrow(() -> new ApiRequestException("Theres no account with such a number", HttpStatus.BAD_REQUEST));
+        return accountRepository.findByNumber(number).orElseThrow(() -> new ApiRequestException("There's no account with such a number", HttpStatus.BAD_REQUEST));
+    }
+
+    @Override
+    public Account findByCardNumber(String number) {
+        return accountRepository.findByCard_Number(number).orElseThrow(() -> new ApiRequestException("There's no account with this card number", HttpStatus.BAD_REQUEST));
     }
 
     @Override

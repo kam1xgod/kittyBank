@@ -30,6 +30,11 @@ public class Card {
     @Enumerated(EnumType.STRING)
     private CardType type;
 
-    // todo: method that returns month and year as string or int.
-    // todo: use substring for it.
+    public String getMonth() {
+        return this.month_year.substring(0, 2);
+    }
+
+    public String getYear() {
+        return this.month_year.substring(3);
+    }
 }

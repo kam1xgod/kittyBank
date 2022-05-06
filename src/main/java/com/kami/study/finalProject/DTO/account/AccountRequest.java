@@ -16,6 +16,9 @@ public class AccountRequest {
     @NotNull(message = "Fill the input field.")
     private AccountType type;
 
+    // todo: make different classes for credit account, card account and savings account requests.
+    // todo: and responses.
+
     @Nullable
     private Double creditLimit;
 

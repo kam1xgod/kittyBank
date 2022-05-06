@@ -16,6 +16,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -41,16 +42,16 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public List<Credit> delete(Credit credit) {
         creditRepository.delete(credit);
-        return creditRepository.findAll();
+        return findAll();
     }
 
     @Override
     public Credit create(Credit credit) {
         checkRequirements(credit);
-        credit.setDate(Date.valueOf(LocalDate.now()));
-        credit.setStatus(CreditStatus.WAITING);
-        credit.setPenalty(0.01);
-        credit.setDays(30); // todo: remake with this: LocalDate.now().getMonth().maxLength()
+
+        credit.setCommission();
+        credit.setDays();
+        credit.calculateTotal();
         creditRepository.save(credit);
         return credit;
     }
@@ -60,7 +61,6 @@ public class CreditServiceImpl implements CreditService {
         creditRepository.save(credit);
         return credit;
     }
-
 
     // todo: move this method into checker class.
     @Override

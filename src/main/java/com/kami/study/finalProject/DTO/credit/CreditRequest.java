@@ -1,25 +1,20 @@
 package com.kami.study.finalProject.DTO.credit;
 
-import com.kami.study.finalProject.model.enums.Currency;
 import lombok.Data;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 
 @Data
 public class CreditRequest {
     @NotNull(message = "Fill the input field.")
     private Double amount;
 
-    private Currency currency;
-
     @NotBlank(message = "Fill the input field.")
     private String accountNumber;
 
     @NotNull(message = "Fill the input field.")
-    private Double percentage;
+    private Double percentage; // todo: move percentage to Account entity. I need it 'cuz percentage controlled by operator. Credits in one account will have one percentage.
 
     // todo: some fields can be empty actually.
 

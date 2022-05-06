@@ -48,6 +48,7 @@ public class Account {
     @Builder.Default
     private Currency currency = Currency.RUB;
 
+    @Nullable
     private Double creditLimit;
 
     @OneToOne

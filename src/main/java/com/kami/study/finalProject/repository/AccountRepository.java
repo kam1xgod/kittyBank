@@ -15,4 +15,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     Optional<Account> findFirstByOwnerIdOrderByIdDesc(Long userId);
     Optional<Account> findFirstByOwner(User user);
+
+    Optional<Account> findByCard_Number(String cardNumber);
 }

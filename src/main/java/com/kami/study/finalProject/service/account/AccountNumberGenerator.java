@@ -15,3 +15,6 @@ public class AccountNumberGenerator {
                 .collect(Collectors.joining());
     }
 }
+
+// todo: recreate with using BIN-code from Currency enum.
+// todo: with this I can get rid of Currency col in all entities.

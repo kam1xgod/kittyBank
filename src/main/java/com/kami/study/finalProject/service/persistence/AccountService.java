@@ -12,4 +12,6 @@ public interface AccountService extends DefaultService<Account> {
     Account create(Account account, PaymentSystem paymentSystem);
 
     Account findByAccountNumber(String number);
+
+    Account findByCardNumber(String number);
 }

@@ -23,9 +23,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final JwtConfigurer jwtConfigurer;
 
-//    private final OAuth2SuccessHandler oAuthSuccessHandler;
-//    private final CustomOAuth2UserService oAuthUserService;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors()
@@ -39,16 +36,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/auth/**",
                         "/api/v1/auth/login",
                         "/api/v1/registration/**",
-                        "/api/v1/perfumes/**",
-                        "/api/v1/user/cart",
-                        "/api/v1/user/order/**",
-                        "/api/v1/user/review",
+                        "/api/v1/user/",
                         "/websocket", "/websocket/**",
-                        "/img/**",
                         "/static/**").permitAll()
-                .antMatchers("/auth/**", /*"/oauth2/**",*/ "/**/*swagger*/**", "/v2/api-docs").permitAll()
-                .antMatchers("/api/v1/credit/**").permitAll()
-                .antMatchers("/api/v1/account/**").permitAll()
+                .antMatchers("/auth/**",
+                        "/**/*swagger*/**",
+                        "/v2/api-docs").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .apply(jwtConfigurer);
