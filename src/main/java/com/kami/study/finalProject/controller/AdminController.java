@@ -35,12 +35,12 @@ public class AdminController {
         return ResponseEntity.ok(userMapper.findAll());
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/users/byId/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userMapper.findUserById(id));
     }
 
-    @GetMapping("/users/{mail}")
+    @GetMapping("/users/byMail/{mail}")
     public ResponseEntity<UserResponse> getUserByMail(@PathVariable String mail) {
         return ResponseEntity.ok(userMapper.findUserByMail(mail));
     }
@@ -50,9 +50,14 @@ public class AdminController {
         return ResponseEntity.ok(transferMapper.findByUserId(id));
     }
 
-    @GetMapping("/users/{id}/accounts")
+    @GetMapping("/users/byId/{id}/accounts")
     public ResponseEntity<List<AccountResponse>> getUserAccounts(@PathVariable Long id) {
         return ResponseEntity.ok(accountMapper.findByUserId(id));
+    }
+
+    @GetMapping("/users/byMail/{mail}/accounts")
+    public ResponseEntity<List<AccountResponse>> getUserAccounts(@PathVariable String mail) {
+        return ResponseEntity.ok(accountMapper.findByUserMail(mail));
     }
 
     @GetMapping("/accounts")
