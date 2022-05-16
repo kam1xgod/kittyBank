@@ -11,6 +11,8 @@ import javax.validation.constraints.Min;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
+import java.time.temporal.ChronoUnit;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,7 +41,6 @@ public class Credit {
 
     @Builder.Default
     private Double penalty = 0.0;
-    private Double percentage;
     @Builder.Default
     private Double commission = 0.0;
     private Double total;
@@ -66,8 +67,10 @@ public class Credit {
     }
 
     private Double getAmountWithPercentage() {
-        return getAmount() * getPercentage();
+        return getAmount() * getAccount().getPercentage();
     }
+
+    // todo: move methods below to CreditService.
 
     public void addPenalty() {
         setTotal(getTotal() + getAmount() * getPenalty());
@@ -79,7 +82,7 @@ public class Credit {
             setCommission(0.1); // todo: some const with default commission;
 
             try {
-                setAmount(getAmount() * ExchangeService.getRate(getAccount().getCurrency()));
+                setTotal(getAmount() * ExchangeService.getRate(getAccount().getCurrency()));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -87,15 +90,23 @@ public class Credit {
     }
 
     // todo: idk if it's ok to keep this methods here. will stick with it for now.
-
     private void payOrCloseCredit() {
-        if (getAccount().getBalance() < getTotal()) {
-            setTotal(getTotal() - getAccount().getBalance());
-            getAccount().withdrawMoney(getAccount().getBalance());
-            return;
+        double exchanged = getAccount().getExchangedBalance();
+        if (exchanged > getTotal()) {
+            exchanged = getTotal();
         }
-        getAccount().withdrawMoney(getTotal());
-        setTotal(0.0);
-        setStatus(CreditStatus.CLOSED);
+        pay(exchanged);
+    }
+
+    private void pay(Double sum) {
+        setTotal(getTotal() - sum);
+        getAccount().withdrawMoney(sum);
+        if (getTotal() == 0.0) {
+            setStatus(CreditStatus.CLOSED);
+        }
+    }
+
+    public Long getDaysLeft() {
+        return ChronoUnit.DAYS.between(LocalDate.now(), getDate().toLocalDate().plusDays(getDays()));
     }
 }

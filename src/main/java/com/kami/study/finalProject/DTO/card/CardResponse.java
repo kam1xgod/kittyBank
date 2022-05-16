@@ -6,7 +6,6 @@ import lombok.Data;
 public class CardResponse {
     private Long id;
     private String number;
-    private String month_year;
+    private String monthYear;
     private String cvv;
-
 }

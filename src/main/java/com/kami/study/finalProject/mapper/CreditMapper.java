@@ -16,6 +16,8 @@ import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class CreditMapper {
@@ -23,6 +25,16 @@ public class CreditMapper {
     private final CommonMapper commonMapper;
     private final CreditService creditService;
     private final AccountService accountService;
+
+    public List<CreditResponse> findAll() {
+        propertyDaysLeft();
+        return commonMapper.convertToResponseList(creditService.findAll(), CreditResponse.class);
+    }
+
+    public CreditResponse findById(Long id) {
+        propertyDaysLeft();
+        return commonMapper.convert(creditService.findById(id), CreditResponse.class);
+    }
 
     public CreditResponse create(CreditRequest request, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -43,5 +55,22 @@ public class CreditMapper {
 
         Credit credit = commonMapper.convert(request, Credit.class);
         return commonMapper.convert(creditService.create(credit), CreditResponse.class);
+    }
+
+    public List<CreditResponse> getCreditsByMail(String mail) {
+        propertyDaysLeft();
+        return commonMapper.convertToResponseList(creditService.findByUserMail(mail), CreditResponse.class);
+    }
+
+    public List<CreditResponse> getCreditsByAccountId(Long id) {
+        propertyDaysLeft();
+        return commonMapper.convertToResponseList(creditService.findByAccountId(id), CreditResponse.class);
+    }
+
+    private void propertyDaysLeft() {
+        TypeMap<Credit, CreditResponse> propertyMap = commonMapper.createPropertyMapper(Credit.class, CreditResponse.class);
+        propertyMap.addMappings(mapper -> {
+            mapper.map(Credit::getDaysLeft, CreditResponse::setDaysLeft);
+        });
     }
 }

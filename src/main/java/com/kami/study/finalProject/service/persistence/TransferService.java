@@ -10,4 +10,8 @@ public interface TransferService extends DefaultService<Transfer> {
     boolean checkTransfer(Transfer transfer);
     Transfer create(Double amount, User sender, User recipient);
     Transfer create(Double amount, String senderCardOrAccountNumber, String recipientCardOrAccountNumber);
+    List<Transfer> findByUserMail(String mail);
+    List<Transfer> findByAccountId(Long id);
+
+    List<Transfer> findByUserId(Long id);
 }

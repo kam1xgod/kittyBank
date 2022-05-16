@@ -6,5 +6,5 @@ import lombok.Data;
 public class AuthenticationResponse {
     private String mail;
     private String token;
-    private String userRole;
+    private String role;
 }

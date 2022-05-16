@@ -9,4 +9,10 @@ import java.util.List;
 @Repository
 public interface CreditRepository extends JpaRepository<Credit, Long> {
     List<Credit> findByAccount_Number(String accountNumber);
+
+    List<Credit> findByAccount_Id(Long id);
+
+    List<Credit> findByAccount_Owner_Mail(String mail);
+
+    List<Credit> findByAccount_Card_Number(String cardNumber);
 }

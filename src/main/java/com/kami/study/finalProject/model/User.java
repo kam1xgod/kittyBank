@@ -32,9 +32,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne
-    private Passport passport;
-
     @OneToMany
     @JoinTable(name = "user_account", joinColumns = @JoinColumn(name = "user"))
     private List<Account> accounts;

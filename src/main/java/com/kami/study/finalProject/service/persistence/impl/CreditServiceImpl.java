@@ -7,6 +7,7 @@ import com.kami.study.finalProject.model.enums.AccountStatus;
 import com.kami.study.finalProject.model.enums.AccountType;
 import com.kami.study.finalProject.model.enums.CreditStatus;
 import com.kami.study.finalProject.repository.CreditRepository;
+import com.kami.study.finalProject.service.checker.impl.CreditChecker;
 import com.kami.study.finalProject.service.persistence.CreditService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ import java.util.Optional;
 public class CreditServiceImpl implements CreditService {
 
     private final CreditRepository creditRepository;
+    private final CreditChecker creditChecker;
 
     @Override
     public List<Credit> findAll() {
@@ -47,7 +49,7 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public Credit create(Credit credit) {
-        checkRequirements(credit);
+        creditChecker.check(credit);
 
         credit.setCommission();
         credit.setDays();
@@ -62,28 +64,25 @@ public class CreditServiceImpl implements CreditService {
         return credit;
     }
 
-    // todo: move this method into checker class.
     @Override
-    public void checkRequirements(Credit credit) {
-        if (credit.getAmount() <= 0) {
-            throw new ApiRequestException("Credit amount should be higher than zero", HttpStatus.BAD_REQUEST);
-        }
-        if (!credit.getAccount().getType().equals(AccountType.CREDIT)) {
-            throw new ApiRequestException("Account type is not Credit.", HttpStatus.BAD_REQUEST);
-        }
-        if (!credit.getAccount().getStatus().equals(AccountStatus.ACTIVE)) {
-            throw new ApiRequestException("Account is not active.", HttpStatus.BAD_REQUEST);
-        }
-        if (credit.getAccount().getCreditLimit() < credit.getAmount()) {
-            throw new ApiRequestException("Account's credit limit is lower than credit you want to take.", HttpStatus.BAD_REQUEST);
-        }
-        for (Credit c : creditRepository.findByAccount_Number(credit.getAccount().getNumber())) {
-            if (c.getStatus().equals(CreditStatus.OVERDUE)) {
-                throw new ApiRequestException("This account have an overdue credit.", HttpStatus.BAD_REQUEST);
-            }
-        }
+    public List<Credit> findByAccountId(Long id) {
+        return creditRepository.findByAccount_Id(id);
     }
 
-    // todo: think of closing credits. actually: I should find a way to create transfers from any account to credit account.
-    // todo: when all loan was payed - credit can be closed.
+    @Override
+    public List<Credit> findByAccountNumber(String number) {
+        return creditRepository.findByAccount_Number(number);
+    }
+
+    @Override
+    public List<Credit> findByUserMail(String mail) {
+        return creditRepository.findByAccount_Owner_Mail(mail);
+    }
+
+    @Override
+    public List<Credit> findByCardNumber(String number) {
+        return creditRepository.findByAccount_Card_Number(number);
+    }
+
+
 }

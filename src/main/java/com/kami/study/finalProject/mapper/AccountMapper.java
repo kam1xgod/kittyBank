@@ -5,6 +5,7 @@ import com.kami.study.finalProject.DTO.account.AccountResponse;
 import com.kami.study.finalProject.exception.InputFieldException;
 import com.kami.study.finalProject.model.Account;
 import com.kami.study.finalProject.model.User;
+import com.kami.study.finalProject.model.enums.AccountType;
 import com.kami.study.finalProject.service.persistence.AccountService;
 import com.kami.study.finalProject.service.persistence.UserService;
 import lombok.RequiredArgsConstructor;
@@ -14,12 +15,18 @@ import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class AccountMapper {
     private final CommonMapper commonMapper;
     private final AccountService accountService;
     private final UserService userService;
+
+    public List<AccountResponse> findAll() {
+        return commonMapper.convertToResponseList(accountService.findAll(), AccountResponse.class);
+    }
 
     public AccountResponse create(AccountRequest accountRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -40,5 +47,25 @@ public class AccountMapper {
 
         Account account = commonMapper.convert(accountRequest, Account.class);
         return commonMapper.convert(accountService.create(account, accountRequest.getPaymentSystem()), AccountResponse.class);
+    }
+
+    public List<AccountResponse> findByUserMail(String mail) {
+        return commonMapper.convertToResponseList(accountService.findByUserMail(mail), AccountResponse.class);
+    }
+
+    public List<AccountResponse> findByUserId(Long id) {
+        return commonMapper.convertToResponseList(accountService.findByUserId(id), AccountResponse.class);
+    }
+
+    public AccountResponse findById(Long id) {
+        return commonMapper.convert(accountService.findById(id), AccountResponse.class);
+    }
+
+    public String activateAccount(String code) {
+        return accountService.activateAccount(code);
+    }
+
+    public List<AccountResponse> findAllCreditAccounts(String mail) {
+        return commonMapper.convertToResponseList(accountService.findByOwnerMailAndType(mail, AccountType.CREDIT), AccountResponse.class);
     }
 }

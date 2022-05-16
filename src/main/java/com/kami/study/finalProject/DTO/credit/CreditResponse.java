@@ -1,5 +1,6 @@
 package com.kami.study.finalProject.DTO.credit;
 
+import com.kami.study.finalProject.model.enums.CreditStatus;
 import lombok.Data;
 
 import java.sql.Date;
@@ -7,9 +8,8 @@ import java.sql.Date;
 @Data
 public class CreditResponse {
     private Long id;
-    private Double amount;
+    private Double total;
     private Date date;
-    private Double percentage;
-
-    // todo: this should be sent to user with account number. not this actually. info 'bout credit account which can be opened for them.
+    private CreditStatus status;
+    private Long daysLeft;
 }

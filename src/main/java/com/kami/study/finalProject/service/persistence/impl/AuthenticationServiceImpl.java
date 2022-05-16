@@ -32,7 +32,6 @@ import java.util.UUID;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
-    private final RestTemplate restTemplate;
     private final JwtProvider jwtProvider;
     private final MailSender mailSender;
     private final PasswordEncoder passwordEncoder;
@@ -42,24 +41,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Value("${hostname}")
     private String hostname;
 
-//    @Value("${recaptcha.secret}")
-    private String secret;
-
-//    @Value("${recaptcha.url}")
-    private String captchaUrl;
-
     @Override
     public Map<String, String> login(String mail, String password) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(mail, password));
             User user = userRepository.findByMail(mail)
                     .orElseThrow(() -> new ApiRequestException("Email not found.", HttpStatus.NOT_FOUND));
-            String userRole = user.getRole().name();
-            String token = jwtProvider.createToken(mail, userRole);
+            String role = user.getRole().name();
+            String token = jwtProvider.createToken(mail, role);
             Map<String, String> response = new HashMap<>();
             response.put("mail", mail);
             response.put("token", token);
-            response.put("userRole", userRole);
+            response.put("role", role);
             return response;
         } catch (AuthenticationException e) {
             throw new ApiRequestException("Incorrect password or email.", HttpStatus.FORBIDDEN);
@@ -83,7 +76,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
-        // todo: insert in another class with this method.
         String subject = "Activation code";
         String template = "registration-template";
         Map<String, Object> attributes = new HashMap<>();
@@ -92,26 +84,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         mailSender.sendMessageHtml(user.getMail(), subject, template, attributes);
         return "User successfully registered.";
     }
-
-//    @Override
-//    public User registerOauth2User(String provider, OAuth2UserInfo oAuth2UserInfo) {
-//        User user = new User();
-//        user.setMail(oAuth2UserInfo.getMail());
-//        user.setFirstname(oAuth2UserInfo.getFirstName());
-//        user.setLastname(oAuth2UserInfo.getLastName());
-//        user.setActive(true);
-//        user.setRole(UserRole.USER);
-//        user.setProvider(AuthProvider.valueOf(provider.toUpperCase()));
-//        return userRepository.save(user);
-//    }
-//
-//    @Override
-//    public User updateOauth2User(User user, String provider, OAuth2UserInfo oAuth2UserInfo) {
-//        user.setFirstname(oAuth2UserInfo.getFirstName());
-//        user.setLastname(oAuth2UserInfo.getLastName());
-//        user.setProvider(AuthProvider.valueOf(provider.toUpperCase()));
-//        return userRepository.save(user);
-//    }
 
     @Override
     public String activateUser(String code) {

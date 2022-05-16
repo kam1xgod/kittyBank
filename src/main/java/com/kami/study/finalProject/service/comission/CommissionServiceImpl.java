@@ -25,7 +25,6 @@ public class CommissionServiceImpl implements CommissionService {
 
     @Override
     public Double calculate(Transfer transfer) {
-        // todo: think 'bout it.
         Double commission;
         String recipientCardNumber = transfer.getRecipient().getCard().getNumber();
         if (!Objects.isNull(recipientCardNumber)) {

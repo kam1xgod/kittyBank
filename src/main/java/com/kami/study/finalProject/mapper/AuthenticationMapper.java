@@ -1,9 +1,9 @@
 package com.kami.study.finalProject.mapper;
 
 import com.kami.study.finalProject.DTO.PasswordResetRequest;
+import com.kami.study.finalProject.DTO.RegistrationRequest;
 import com.kami.study.finalProject.DTO.auth.AuthenticationRequest;
 import com.kami.study.finalProject.DTO.auth.AuthenticationResponse;
-import com.kami.study.finalProject.DTO.RegistrationRequest;
 import com.kami.study.finalProject.DTO.user.UserResponse;
 import com.kami.study.finalProject.exception.InputFieldException;
 import com.kami.study.finalProject.model.User;
@@ -25,7 +25,7 @@ public class AuthenticationMapper {
         AuthenticationResponse response = new AuthenticationResponse();
         response.setMail(credentials.get("mail"));
         response.setToken(credentials.get("token"));
-        response.setUserRole(credentials.get("userRole"));
+        response.setRole(credentials.get("role"));
         return response;
     }
 

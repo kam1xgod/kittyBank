@@ -13,16 +13,20 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/account/")
+@RequestMapping("/api/v1/account")
 @RequiredArgsConstructor
 public class AccountController {
 
     private final AccountMapper accountMapper;
 
     @PostMapping("/new")
-    public ResponseEntity<AccountResponse> createNewAccount(/*@AuthenticationPrincipal UserPrincipal user,*/
-                                                            @Valid @RequestBody AccountRequest accountRequest,
+    public ResponseEntity<AccountResponse> createNewAccount(@Valid @RequestPart("account") AccountRequest accountRequest,
                                                             BindingResult bindingResult) {
         return ResponseEntity.ok(accountMapper.create(accountRequest, bindingResult));
+    }
+
+    @GetMapping("/activate/{code}")
+    public ResponseEntity<String> activateEmailCode(@PathVariable String code) {
+        return ResponseEntity.ok(accountMapper.activateAccount(code));
     }
 }

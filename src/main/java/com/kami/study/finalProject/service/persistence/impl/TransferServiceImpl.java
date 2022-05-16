@@ -10,6 +10,7 @@ import com.kami.study.finalProject.repository.CardRepository;
 import com.kami.study.finalProject.repository.TransferRepository;
 import com.kami.study.finalProject.repository.UserRepository;
 import com.kami.study.finalProject.service.comission.CommissionService;
+import com.kami.study.finalProject.service.fraudMonitor.FraudMonitor;
 import com.kami.study.finalProject.service.persistence.TransferService;
 import com.kami.study.finalProject.service.checker.Checker;
 import com.kami.study.finalProject.service.checker.impl.TransferCheckerImpl;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,11 +31,12 @@ import java.util.Optional;
 public class TransferServiceImpl implements TransferService {
 
     private final TransferRepository transferRepository;
-//    private final UserRepository userRepository;
     private final CardRepository cardRepository;
     private final AccountRepository accountRepository;
     private final CommissionService commissionService;
     private final Checker checker = new TransferCheckerImpl();
+
+    private final FraudMonitor fraudMonitor;
 
     @Override
     public List<Transfer> findAll() {
@@ -61,16 +64,12 @@ public class TransferServiceImpl implements TransferService {
         return transferRepository.save(object);
     }
 
+    // todo: transfers with sender number 0 - from bank. like capitalization and etc.
+
     @Override
     public List<Transfer> commitTransfer(Transfer transfer) {
-
-        // todo: credit closing transfer.
-        // todo: it should be only RUB currency.
-        // todo: if account was opened in another currency - 10% commission required.
-        // todo:
-
         try {
-            if (checkTransfer(transfer)) {
+            if (checkTransfer(transfer) && !fraudMonitor.checkTransfer(transfer)) {
                 transfer.setCommission(commissionService.calculate(transfer));
                 transfer.getSender().withdrawMoney(transfer.getAmount() + transfer.getCommission());
                 transfer.getRecipient().addMoney(transfer.getAmount());
@@ -115,6 +114,30 @@ public class TransferServiceImpl implements TransferService {
                 .sender(senderAccount)
                 .amount(amount)
                 .build();
+    }
+
+    @Override
+    public List<Transfer> findByUserMail(String mail) {
+        List<Transfer> concatList = new ArrayList<>();
+        concatList.addAll(transferRepository.getBySender_Owner_Mail(mail));
+        concatList.addAll(transferRepository.getByRecipient_Owner_Mail(mail));
+        return concatList;
+    }
+
+    @Override
+    public List<Transfer> findByAccountId(Long id) {
+        List<Transfer> concatList = new ArrayList<>();
+        concatList.addAll(transferRepository.getBySender_Id(id));
+        concatList.addAll(transferRepository.getByRecipient_Id(id));
+        return concatList;
+    }
+
+    @Override
+    public List<Transfer> findByUserId(Long id) {
+        List<Transfer> concatList = new ArrayList<>();
+        concatList.addAll(transferRepository.getBySender_Owner_Id(id));
+        concatList.addAll(transferRepository.getByRecipient_Owner_Id(id));
+        return concatList;
     }
 
     private Account getAccountFromCardOrAccount(String cardOrAccountNumber) {

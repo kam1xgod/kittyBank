@@ -4,6 +4,7 @@ import com.kami.study.finalProject.exception.InsufficientFundsException;
 import com.kami.study.finalProject.model.Account;
 import com.kami.study.finalProject.model.Transfer;
 import com.kami.study.finalProject.model.enums.AccountStatus;
+import com.kami.study.finalProject.model.enums.AccountType;
 import com.kami.study.finalProject.service.checker.Checker;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +32,14 @@ public class TransferCheckerImpl implements Checker<Transfer> {
             transfer.deny();
             throw new UnsupportedOperationException("Account to which you're trying to transfer money is not active.");
         }
+        if (!isAccountSavingAndCanWithdraw(transfer.getSender())) {
+            transfer.deny();
+            throw new UnsupportedOperationException("Account from which you're trying to transfer money is not the withdraw one.");
+        }
+        if (!isAccountSavingAndCanDeposit(transfer.getRecipient())) {
+            transfer.deny();
+            throw new UnsupportedOperationException("Account to which you're trying to transfer money is not the deposit one.");
+        }
         return true;
     }
 
@@ -48,5 +57,13 @@ public class TransferCheckerImpl implements Checker<Transfer> {
 
     private boolean isAccountActive(Account account) {
         return account.getStatus().equals(AccountStatus.ACTIVE);
+    }
+
+    private boolean isAccountSavingAndCanWithdraw(Account account) {
+        return account.getType().equals(AccountType.SAVING) && account.isCanWithdraw();
+    }
+
+    private boolean isAccountSavingAndCanDeposit(Account account) {
+        return account.getType().equals(AccountType.SAVING) && account.isCanDeposit();
     }
 }

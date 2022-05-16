@@ -5,6 +5,8 @@ import com.kami.study.finalProject.service.persistence.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class UserMapper {
@@ -13,5 +15,13 @@ public class UserMapper {
 
     public UserResponse findUserById(Long userId) {
         return commonMapper.convert(userService.findById(userId), UserResponse.class);
+    }
+
+    public UserResponse findUserByMail(String mail) {
+        return commonMapper.convert(userService.findUserByEmail(mail), UserResponse.class);
+    }
+
+    public List<UserResponse> findAll() {
+        return commonMapper.convertToResponseList(userService.findAll(), UserResponse.class);
     }
 }

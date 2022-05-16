@@ -4,14 +4,16 @@ import com.kami.study.finalProject.model.enums.AccountStatus;
 import com.kami.study.finalProject.model.enums.AccountType;
 import com.kami.study.finalProject.model.enums.Currency;
 import com.kami.study.finalProject.service.account.AccountNumberGenerator;
+import com.kami.study.finalProject.service.card.CardNumberGenerator;
+import com.kami.study.finalProject.service.exchange.ExchangeService;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,13 +23,11 @@ import java.util.List;
 @Entity
 @Table(name = "account")
 public class Account {
-    // number - 20 digits.
-    // card - from 13 to 19 digits. will take from 13 to 16 digits.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Length(min = 20, max = 20)
+    @Length(min = 19, max = 20)
     @Builder.Default
     private String number = AccountNumberGenerator.generate();
 
@@ -42,7 +42,8 @@ public class Account {
     private AccountStatus status = AccountStatus.WAITING;
 
     @Enumerated(EnumType.STRING)
-    private AccountType type;
+    @Builder.Default
+    private AccountType type = AccountType.CARD;
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
@@ -59,9 +60,43 @@ public class Account {
     @JoinColumn(name = "owner")
     private User owner;
 
-    @OneToMany
-    @JoinTable(name = "account_credit", joinColumns = @JoinColumn(name = "account_id"))
-    private List<Credit> credits;
+    @Nullable
+    @Builder.Default
+    private Double percentage = null;
+
+    @Builder.Default
+    private boolean canWithdraw = false;
+
+    @Builder.Default
+    private boolean canDeposit = false;
+
+    @Builder.Default
+    private boolean closable = false;
+
+    @Builder.Default
+    private boolean capitalized = false;
+
+    @Nullable
+    @Builder.Default
+    private Double min = 100_000.0;
+
+    @Nullable
+    @Builder.Default
+    private Double max = 1_000_000.0;
+
+    @Nullable
+    @Builder.Default
+    private Double minMonth = 0.0;
+
+    @Nullable
+    @Builder.Default
+    private Long years = 0L;
+
+    @Builder.Default
+    private Date dateOpened = Date.valueOf(LocalDate.now());
+
+    @Nullable
+    private String activationCode;
 
     public void addMoney(Double amount) {
         this.balance += amount;
@@ -71,5 +106,13 @@ public class Account {
     public void withdrawMoney(Double amount) {
         this.balance -= amount;
         setLastTransactionDate(Date.valueOf(LocalDate.now()));
+    }
+
+    public double getExchangedBalance() {
+        try {
+            return getBalance() * ExchangeService.getRate(getCurrency());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

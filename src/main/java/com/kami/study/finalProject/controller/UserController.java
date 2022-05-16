@@ -1,42 +1,74 @@
 package com.kami.study.finalProject.controller;
 
-import com.kami.study.finalProject.model.User;
-import com.kami.study.finalProject.service.persistence.UserService;
+import com.kami.study.finalProject.DTO.account.AccountResponse;
+import com.kami.study.finalProject.DTO.credit.CreditResponse;
+import com.kami.study.finalProject.DTO.creditAccountRequest.CreditAccountRequestResponse;
+import com.kami.study.finalProject.DTO.transfer.TransferResponse;
+import com.kami.study.finalProject.DTO.user.UserResponse;
+import com.kami.study.finalProject.mapper.AccountMapper;
+import com.kami.study.finalProject.mapper.CreditMapper;
+import com.kami.study.finalProject.mapper.TransferMapper;
+import com.kami.study.finalProject.mapper.UserMapper;
+import com.kami.study.finalProject.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/user")
 public class UserController {
-    final UserService service;
+    private final UserMapper userMapper;
+    private final AccountMapper accountMapper;
+    private final TransferMapper transferMapper;
+    private final CreditMapper creditMapper;
 
-    @GetMapping
-    public ResponseEntity<User> getById(@RequestBody Long id) {
-        Optional<User> optionalUser = service.findById(id);
-        return optionalUser
-                .map(user -> new ResponseEntity<>(user, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    @GetMapping("/info")
+    public ResponseEntity<UserResponse> userInfo(@AuthenticationPrincipal UserPrincipal user) {
+        return ResponseEntity.ok(userMapper.findUserByMail(user.getMail()));
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        return new ResponseEntity<>("Hello!", HttpStatus.OK);
+    @GetMapping("/accounts")
+    public ResponseEntity<List<AccountResponse>> userAccounts(@AuthenticationPrincipal UserPrincipal user) {
+        return ResponseEntity.ok(accountMapper.findByUserMail(user.getMail()));
     }
 
-    @GetMapping("/admin/all")
-    public ResponseEntity<List<User>> getAll() {
-        List<User> list = service.findAll();
-        return list != null && !list.isEmpty()
-                ? new ResponseEntity<>(list, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
+    @GetMapping("/accounts/{id}")
+    public ResponseEntity<AccountResponse> userAccountById(@PathVariable Long id) {
+        return ResponseEntity.ok(accountMapper.findById(id));
+    }
+
+    @GetMapping("/accounts/{id}/transfers")
+    public ResponseEntity<List<TransferResponse>> userAccountTransfers(@PathVariable Long id) {
+        return ResponseEntity.ok(transferMapper.findByAccountId(id));
+    }
+
+    @GetMapping("/accounts/credit")
+    public ResponseEntity<List<AccountResponse>> getAllCreditAccount(@AuthenticationPrincipal UserPrincipal user) {
+        return ResponseEntity.ok(accountMapper.findAllCreditAccounts(user.getMail()));
+    }
+
+    @GetMapping("/transfers")
+    public ResponseEntity<List<TransferResponse>> userTransfers(@AuthenticationPrincipal UserPrincipal user) {
+        return ResponseEntity.ok(transferMapper.findByUserMail(user.getMail()));
+    }
+
+    @GetMapping("/transfers/{id}")
+    public ResponseEntity<TransferResponse> userTransferById(@PathVariable Long id) {
+        return ResponseEntity.ok(transferMapper.findById(id));
+    }
+
+    @GetMapping("/credits")
+    public ResponseEntity<List<CreditResponse>> getAllUserCredits(@AuthenticationPrincipal UserPrincipal user) {
+        return ResponseEntity.ok(creditMapper.getCreditsByMail(user.getMail()));
+    }
+
+    @GetMapping("/accounts/{id}/credits")
+    public ResponseEntity<List<CreditResponse>> getAllAccountCredits(@PathVariable Long id) {
+        return ResponseEntity.ok(creditMapper.getCreditsByAccountId(id));
     }
 }
+

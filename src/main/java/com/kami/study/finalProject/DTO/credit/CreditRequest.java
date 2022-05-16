@@ -13,12 +13,7 @@ public class CreditRequest {
     @NotBlank(message = "Fill the input field.")
     private String accountNumber;
 
-    @NotNull(message = "Fill the input field.")
-    private Double percentage; // todo: move percentage to Account entity. I need it 'cuz percentage controlled by operator. Credits in one account will have one percentage.
-
-    // todo: some fields can be empty actually.
+    // todo: actually some fields can be empty.
 
     // todo: this should be only in AdminController.
-
-    // todo: think about your queries in repositories.
 }

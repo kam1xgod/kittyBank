@@ -1,5 +1,6 @@
 package com.kami.study.finalProject.configuration;
 
+import com.kami.study.finalProject.model.enums.Role;
 import com.kami.study.finalProject.security.JwtConfigurer;
 import com.kami.study.finalProject.security.oauth2.CustomOAuth2UserService;
 import com.kami.study.finalProject.security.oauth2.OAuth2SuccessHandler;
@@ -37,6 +38,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/api/v1/auth/login",
                         "/api/v1/registration/**",
                         "/api/v1/user/",
+                        "/api/v1/user/info",
                         "/websocket", "/websocket/**",
                         "/static/**").permitAll()
                 .antMatchers("/auth/**",

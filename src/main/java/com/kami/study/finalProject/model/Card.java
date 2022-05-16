@@ -2,12 +2,8 @@ package com.kami.study.finalProject.model;
 
 import com.kami.study.finalProject.model.enums.CardType;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +19,7 @@ public class Card {
 
     private String number;
 
-    private String month_year;
+    private String monthYear;
 
     private String cvv;
 
@@ -31,10 +27,10 @@ public class Card {
     private CardType type;
 
     public String getMonth() {
-        return this.month_year.substring(0, 2);
+        return this.monthYear.substring(0, 2);
     }
 
     public String getYear() {
-        return this.month_year.substring(3);
+        return this.monthYear.substring(3);
     }
 }
