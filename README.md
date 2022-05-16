@@ -26,7 +26,7 @@
 
 ### Links
 
-- [CUMyBank]()
+- [CUMyBank](https://sbtfinalproj.herokuapp.com/)
 
 ## My process
 
@@ -34,10 +34,10 @@
 
 - Intellij IDEA Ultimate.
 - Spring boot.
+- React.js.
+- VS Code.
 - Hibernate.
-- 
-- 
-- 
+- Heroku.
 
 ### Heroku deployment
 
@@ -54,33 +54,33 @@
 - The rest of URL is "Database" itself.
 - Test connection and apply settings.
 - Copy "URL" in "Data Sources and Drivers" window.
-- Paste it in db.properties; Also paste there "User" and "Password".
-- Create .war of your Spring MVC app.
+- Paste it in application.properties; Also paste there "User" and "Password".
+- And change there "hostname" to Heroku app for frontend. DON'T PASTE "HTTPS" part.
+- In React project: change URL to one you've got from Heroku deployment.
 - Use instruction down below from Heroku documentation.
 
 ### What I learned
 
-- 
-- 
-- 
-- 
+- How useful DTO's are.
+- How to work with mappers.
+- How to create authentication.
+- How React-Redux works.
+- React with TypeScript.
+- Postman auth requests.
 
 ### Plans
 
-- Create TransferService for manipulating with transfers.
-- Create scheduler for savings and credit accounts.
-- Create CommissionService.
-- Create frontend..
 - CI, Pipeline, Docker, Jenkins, Heroku deployment and also Sonarqube.
-- 
-- 
+- close all my todos.)0))
 
 ### Useful resources
 
 - if you're like me and want to deploy .war - read about it [here](https://devcenter.heroku.com/articles/war-deployment) (for me took around 10 min.)
 - [MariaDB in details for my distro](https://wiki.archlinux.org/title/MariaDB) btw...
 - [W3 Schools](https://www.w3schools.com/) (used for all HTML and CSS)
-- I'm so sorry, I can't remember where I took solution for jsp's proper work with foreign keys. It was Stack Overflow, I guess.
+- [React JS](https://reactjs.org/)
+- [Postman](https://www.postman.com/)
+- A lot of [StackOverFlow](https://stackoverflow.com/) threads.
 
 ## Author
 
