@@ -20,7 +20,7 @@ public class CommissionServiceImpl implements CommissionService {
 
     @Override
     public Double calculate(Double amount, CommissionType type) {
-        return amount * CommissionType.DEFAULT.getCommissionPercent(); //todo: change this DEFAULT commission to something.
+        return amount * type.getCommissionPercent(); //todo: change this DEFAULT commission to something.
     }
 
     @Override
