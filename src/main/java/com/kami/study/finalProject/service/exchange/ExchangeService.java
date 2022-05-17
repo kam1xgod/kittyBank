@@ -15,9 +15,6 @@ import java.net.URL;
 @Service
 @Slf4j
 public class ExchangeService {
-    private static final String URL_USD_RUB = "https://v6.exchangerate-api.com/v6/abfa2886f1b77c08e68f39e2/pair/USD/RUB";
-    private static final String URL_EUR_RUB = "https://v6.exchangerate-api.com/v6/abfa2886f1b77c08e68f39e2/pair/EUR/RUB";
-
     public static Double getRate(Currency currency) throws IOException {
         URL url = new URL(prepareURL(currency));
         HttpURLConnection request = (HttpURLConnection) url.openConnection();

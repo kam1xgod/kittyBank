@@ -12,4 +12,5 @@ public class CreditResponse {
     private Date date;
     private CreditStatus status;
     private Long daysLeft;
+    private Long penalty;
 }
