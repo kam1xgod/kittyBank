@@ -16,9 +16,13 @@
 
 ## Overview
 
+This application is some kind of online banking.
+
 ### Info
 
-
+So, from february I was able to learn more 'bout Java in SbtSchool - program from Russian bank.
+And this is - the graduation work. You can create account with your email, activate it with link sent to it and do basic
+bank things.
 
 ### Screenshot
 
@@ -37,6 +41,7 @@
 - React.js.
 - VS Code.
 - Hibernate.
+- Tried Swagger.
 - Heroku.
 
 ### Heroku deployment
@@ -70,12 +75,12 @@
 
 ### Plans
 
-- CI, Pipeline, Docker, Jenkins, Heroku deployment and also Sonarqube.
+- CI, Pipeline, Docker, Jenkins and also Sonarqube.
+- But I actually will need to write tests for last one.
 - close all my todos.)0))
 
 ### Useful resources
 
-- if you're like me and want to deploy .war - read about it [here](https://devcenter.heroku.com/articles/war-deployment) (for me took around 10 min.)
 - [MariaDB in details for my distro](https://wiki.archlinux.org/title/MariaDB) btw...
 - [W3 Schools](https://www.w3schools.com/) (used for all HTML and CSS)
 - [React JS](https://reactjs.org/)
