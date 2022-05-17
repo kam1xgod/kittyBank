@@ -32,11 +32,11 @@ public class TransferCheckerImpl implements Checker<Transfer> {
             transfer.deny();
             throw new UnsupportedOperationException("Account to which you're trying to transfer money is not active.");
         }
-        if (!isAccountSavingAndCanWithdraw(transfer.getSender())) {
+        if (isAccountSavingAndCanWithdraw(transfer.getSender())) {
             transfer.deny();
             throw new UnsupportedOperationException("Account from which you're trying to transfer money is not the withdraw one.");
         }
-        if (!isAccountSavingAndCanDeposit(transfer.getRecipient())) {
+        if (isAccountSavingAndCanDeposit(transfer.getRecipient())) {
             transfer.deny();
             throw new UnsupportedOperationException("Account to which you're trying to transfer money is not the deposit one.");
         }
