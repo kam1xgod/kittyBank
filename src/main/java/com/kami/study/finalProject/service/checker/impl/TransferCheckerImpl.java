@@ -60,10 +60,10 @@ public class TransferCheckerImpl implements Checker<Transfer> {
     }
 
     private boolean isAccountSavingAndCanWithdraw(Account account) {
-        return account.getType().equals(AccountType.SAVING) && account.isCanWithdraw();
+        return account.getType().equals(AccountType.SAVING) && !account.isCanWithdraw();
     }
 
     private boolean isAccountSavingAndCanDeposit(Account account) {
-        return account.getType().equals(AccountType.SAVING) && account.isCanDeposit();
+        return account.getType().equals(AccountType.SAVING) && !account.isCanDeposit();
     }
 }
