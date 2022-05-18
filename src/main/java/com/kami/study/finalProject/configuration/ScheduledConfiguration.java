@@ -18,6 +18,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableScheduling
@@ -26,11 +27,11 @@ public class ScheduledConfiguration {
 
     private final AccountService accountService;
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(fixedRate = 10 * 1000)
     public void checkAllCreditAccounts() {
         accountService.checkAllCreditAccounts();
     }
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(fixedRate = 10 * 1000)
     public void checkAllSavingAccount() {
         accountService.checkAllSavingAccounts();
     }
