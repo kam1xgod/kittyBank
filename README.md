@@ -21,8 +21,12 @@ This application is some kind of online banking.
 ### Info
 
 So, from february I was able to learn more 'bout Java in SbtSchool - program from Russian bank.
-And this is - the graduation work. You can create account with your email, activate it with link sent to it and do basic
-bank things.
+And this is - the graduation work. You can create become a user with your email, create accounts, 
+activate them with link sent to email and do basic bank things.
+
+Actually, this app should be using GMail, but unfortunately I reached maximum of accounts per number. :(
+
+There's a lot of todo things in this project. I will handle them after finishing this semester in uni.
 
 ### Screenshot
 
@@ -48,7 +52,7 @@ bank things.
 
 - Create app on Heroku.
 - To use ClearDB (Cloud MySQL, I believe) you need to verify your account with card. I used digital one.
-- Go to 'Settings' tab of your Heroku app. 
+- Go to 'Settings' tab of your Heroku app.
 - Find 'Config Vars' and copy URL.
 - Go in IntelliJ IDEA, on right panel open "Database" view.
 - Create new one.
@@ -86,6 +90,7 @@ bank things.
 - [React JS](https://reactjs.org/)
 - [Postman](https://www.postman.com/)
 - A lot of [StackOverFlow](https://stackoverflow.com/) threads.
+- [Kaffein](http://kaffeine.herokuapp.com/) for pinging your heroku app - so it will not be asleep.
 
 ## Author
 

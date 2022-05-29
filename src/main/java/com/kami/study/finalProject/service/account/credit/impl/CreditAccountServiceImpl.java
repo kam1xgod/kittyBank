@@ -42,6 +42,9 @@ public class CreditAccountServiceImpl implements CreditAccountService {
         }
     }
 
+
+    // todo: create repository method for getting credits with certain date.
+    // todo: also change this cycle to stream.
     @Override
     public void checkAllCredits() {
         for (Credit credit : creditRepository.findAll()) {
