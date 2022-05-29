@@ -10,7 +10,7 @@ import { SavingPlan } from "../../../types/types";
 const SavingPlans: FC = () => {
     const dispatch = useDispatch();
     const savingPlans: Array<SavingPlan> = useSelector((state: AppStateType) => state.savingPlan.savingPlans);
-    const loading: boolean = useSelector((state: AppStateType) => state.user.isLoaded);
+    const loading: boolean = useSelector((state: AppStateType) => state.admin.isLoaded);
 
     useEffect(() => {
         dispatch(fetchSavingPlans());

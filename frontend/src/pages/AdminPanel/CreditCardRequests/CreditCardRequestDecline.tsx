@@ -9,7 +9,7 @@ import { deleteCreditRequest } from "../../../redux/thunks/credit-thunks";
 const CreditCardRequestDecline: FC<RouteComponentProps<{ mail: string }>> = ({ match }) => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const loading: boolean = useSelector((state: AppStateType) => state.user.isLoaded);
+    const loading: boolean = useSelector((state: AppStateType) => state.admin.isLoaded);
 
     useEffect(() => {
         dispatch(deleteCreditRequest(match.params.mail, history));

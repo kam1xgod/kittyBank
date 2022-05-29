@@ -10,7 +10,7 @@ import { CreditRequest } from "../../../types/types";
 const CreditCardRequests: FC = () => {
     const dispatch = useDispatch();
     const creditRequests: Array<CreditRequest> = useSelector((state: AppStateType) => state.admin.creditRequests);
-    const loading: boolean = useSelector((state: AppStateType) => state.user.isLoaded);
+    const loading: boolean = useSelector((state: AppStateType) => state.admin.isLoaded);
 
     useEffect(() => {
         dispatch(fetchCreditRequests());

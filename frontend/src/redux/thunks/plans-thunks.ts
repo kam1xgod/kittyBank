@@ -2,7 +2,6 @@ import {Dispatch} from "redux";
 
 import {
     fetchSavingPlansSuccess,
-    fetchSavingPlanSuccess,
     savingPlanAddedFailure,
     savingPlanAddedSuccess,
     savingPlanEditedFailure,
@@ -11,13 +10,8 @@ import {
 import RequestService from '../../utils/request-service';
 import { showLoader } from "../actions/auth-actions";
 
-export const fetchSavingPlan = (id: string) => async (dispatch: Dispatch) => {
-    const response = await RequestService.get("/savings/all/" + id, true);
-    dispatch(fetchSavingPlanSuccess(response.data));
-};
-
 export const fetchSavingPlans = () => async (dispatch: Dispatch) => {
-    const response = await RequestService.get("/savings/all", true);
+    const response = await RequestService.get("/savings/all");
     dispatch(fetchSavingPlansSuccess(response.data));
 };
 

@@ -17,10 +17,16 @@ import {
     getAllCreditRequests,
 } from "../actions/admin-actions";
 import RequestService from '../../utils/request-service';
+
 export const fetchUserAccounts = (id?: string) => async (dispatch: Dispatch) => {
-    const response = await RequestService.get("/admin/users/" + id + "/accounts", true);
+    const response = await RequestService.get("/admin/users/byId/" + id + "/accounts", true);
     dispatch(getUserAccounts(response.data));
 };
+
+export const fetchUserAccountsByMail = (mail: string) => async (dispatch: Dispatch) => {
+    const response = await RequestService.get("/admin/users/byMail/" + mail + "/accounts", true);
+    dispatch(getUserAccounts(response.data));
+}
 
 export const fetchAllUsers = () => async (dispatch: Dispatch) => {
     try {
@@ -34,13 +40,13 @@ export const fetchAllUsers = () => async (dispatch: Dispatch) => {
 
 export const fetchUserInfo = (id: string) => async (dispatch: Dispatch) => {
     dispatch(loadingData());
-    const response = await RequestService.get("/admin/users/" + id, true);
+    const response = await RequestService.get("/admin/users/byId/" + id, true);
     dispatch(getUserInfo(response.data));
 };
 
 export const fetchUserInfoByMail = (mail: string) => async (dispatch: Dispatch) => {
     dispatch(loadingData());
-    const response = await RequestService.get("/admin/users/" + mail, true);
+    const response = await RequestService.get("/admin/users/byMail/" + mail, true);
     dispatch(getUserInfo(response.data));
 };
 
@@ -104,7 +110,6 @@ export const fetchCreditRequests = () => async (dispatch: Dispatch) => {
         console.log(error);
     }
 }
-
 
 export const fetchAllSavingPlans = () => async (dispatch: Dispatch) => {
     try {

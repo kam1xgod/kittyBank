@@ -13,7 +13,7 @@ const ManageCredit: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
     const dispatch = useDispatch();
     const creditData: Partial<Credit> = useSelector((state: AppStateType) => state.admin.credit);
     const loading: boolean = useSelector((state: AppStateType) => state.admin.isLoaded);
-    const { id, date, status, daysLeft, total } = creditData;
+    const { id, date, status, daysLeft, total, penalty } = creditData;
 
     useEffect(() => {
         dispatch(fetchCreditInfo(match.params.id));
@@ -37,6 +37,9 @@ const ManageCredit: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
                             </p>
                             <p className="personal_data_item">Total:
                                 <span className="personal_data_text">{total}</span>
+                            </p>
+                            <p className="personal_data_item">Penalty:
+                                <span className="personal_data_text">{penalty}</span>
                             </p>
                         </div>
                     </div>

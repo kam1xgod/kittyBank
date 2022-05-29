@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {faUserEdit} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-import {fetchUserInfo, fetchUserAccounts} from "../../../redux/thunks/admin-thunks";
+import {fetchUserInfo, fetchUserAccounts, fetchUserInfoByMail, fetchUserAccountsByMail} from "../../../redux/thunks/admin-thunks";
 import {Link, RouteComponentProps} from "react-router-dom";
 import {AppStateType} from "../../../redux/reducers/root-reducer";
 import {Account, User} from "../../../types/types";
@@ -11,18 +11,26 @@ import Spinner from '../../../component/Spinner/Spinner';
 
 const ManageUser: FC<RouteComponentProps<{ id: string }>> = ({match}) => {
     const dispatch = useDispatch();
-    const userData: Partial<User> = useSelector((state: AppStateType) => state.user.user);
+    const userData: Partial<User> = useSelector((state: AppStateType) => state.admin.user);
     const userAccounts: Array<Account> = useSelector((state: AppStateType) => state.user.accounts);
     const loading: boolean = useSelector((state: AppStateType) => state.admin.isLoaded);
     const {id, mail, firstname, lastname, role} = userData;
+
+    useEffect(() => {
+        dispatch(fetchUserInfoByMail(match.params.id));
+    }, []);
+
+    useEffect(() => {
+        dispatch(fetchUserAccountsByMail(match.params.id));
+    }, []);
 
     useEffect(() => {
         dispatch(fetchUserInfo(match.params.id));
     }, []);
 
     useEffect(() => {
-        dispatch(fetchUserAccounts(userData.id?.toString()));
-    }, [userData]);
+        dispatch(fetchUserAccounts(match.params.id));
+    }, [dispatch]);
 
     return (
         <>

@@ -81,6 +81,7 @@ export type Credit = {
     daysLeft: number
     status: string
     total: number
+    penalty: number
 }
 
 export type CreditError = {

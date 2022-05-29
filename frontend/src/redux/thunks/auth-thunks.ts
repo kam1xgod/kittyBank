@@ -53,7 +53,7 @@ export const logout = () => async (dispatch: Dispatch) => {
 
 export const activateUser = (code: string) => async (dispatch: Dispatch) => {
     try {
-        const response = await RequestService.get("/registration/activate/" + code);
+        const response = await RequestService.get("/registration/activation/" + code);
         dispatch(activateUserSuccess(response.data));
     } catch (error) {
         dispatch(activateUserFailure(error.response.data));
