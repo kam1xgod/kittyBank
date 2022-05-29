@@ -28,6 +28,8 @@ Actually, this app should be using GMail, but unfortunately I reached maximum of
 
 There's a lot of todo things in this project. I will handle them after finishing this semester in uni.
 
+Later I will also create repository with all tasks from this JavaSchool. 
+
 ### Screenshot
 
 ![Home page](./screenshot.png)
@@ -41,12 +43,12 @@ There's a lot of todo things in this project. I will handle them after finishing
 ### Built with
 
 - Intellij IDEA Ultimate.
-- Spring boot.
-- React.js.
-- VS Code.
-- Hibernate.
-- Tried Swagger.
-- Heroku.
+- [Spring boot](https://start.spring.io/).
+- [React JS](https://reactjs.org/)
+- [VS Code](https://code.visualstudio.com/).
+- [Hibernate](https://hibernate.org/).
+- Tried [Swagger](https://swagger.io/).
+- [Heroku](https://www.heroku.com).
 
 ### Heroku deployment
 
@@ -79,17 +81,26 @@ There's a lot of todo things in this project. I will handle them after finishing
 
 ### Plans
 
-- CI, Pipeline, Docker, Jenkins and also Sonarqube.
-- But I actually will need to write tests for last one.
+- [Docker](https://www.docker.com/).
+- [Jenkins](https://www.jenkins.io/).
+- [Sonarqube](https://www.sonarqube.org/).
+- actually tests for previous one.
+- [Liquibase](https://www.liquibase.com).
 - close all my todos.)0))
+- will also try to use [Apache Kafka](https://kafka.apache.org/) here.
+- and [RabbitMQ](https://www.rabbitmq.com/).
+- [Swagger](https://swagger.io/).
+- write javadoc?
+- change design.
+- a lot of refactoring... 
 
 ### Useful resources
 
-- [MariaDB in details for my distro](https://wiki.archlinux.org/title/MariaDB) btw...
+- [MariaDB in details for my distro](https://wiki.archlinux.org/title/MariaDB) (btw...).
 - [W3 Schools](https://www.w3schools.com/) (used for all HTML and CSS)
-- [React JS](https://reactjs.org/)
 - [Postman](https://www.postman.com/)
 - A lot of [StackOverFlow](https://stackoverflow.com/) threads.
+- Also a lot of [Baeldung](https://www.baeldung.com/) articles.
 - [Kaffein](http://kaffeine.herokuapp.com/) for pinging your heroku app - so it will not be asleep.
 
 ## Author
