@@ -1,8 +1,6 @@
 package com.kami.study.finalProject.service.account.credit.impl;
 
-import com.kami.study.finalProject.model.Account;
 import com.kami.study.finalProject.model.Card;
-import com.kami.study.finalProject.model.Credit;
 import com.kami.study.finalProject.model.enums.AccountStatus;
 import com.kami.study.finalProject.model.enums.CardType;
 import com.kami.study.finalProject.model.enums.CreditStatus;
@@ -31,47 +29,41 @@ public class CreditAccountServiceImpl implements CreditAccountService {
 
     @Override
     public void checkAllCards() {
-        for (Card card : cardRepository.findAll()) {
-            if (isYearSameAndMonthNext(card)) {
-                if (card.getType().equals(CardType.CREDIT)
-                        && isCardHaveActiveCredit(card.getNumber())) {
-                    return;
-                }
-                cardRepository.delete(card);
-            }
-        }
+        cardRepository.findByType(CardType.CREDIT)
+                .stream()
+                .filter(this::isYearSameAndMonthNext)
+                .filter(card -> !isCardHaveActiveCredit(card.getNumber()))
+                .forEach(cardRepository::delete);
     }
 
-
-    // todo: create repository method for getting credits with certain date.
-    // todo: also change this cycle to stream.
+    // todo: there should be some way to minimize this piece of code.
     @Override
     public void checkAllCredits() {
-        for (Credit credit : creditRepository.findAll()) {
-            if (credit.getDate().compareTo(Date.valueOf(LocalDate.now().plusDays(credit.getDays()))) >= 0
-                    && credit.getStatus().equals(CreditStatus.ACTIVE)) {
-                credit.setStatus(CreditStatus.OVERDUE);
-            }
-            if (credit.getStatus().equals(CreditStatus.OVERDUE)
-                    && credit.getPenalty() < MAX_PENALTY) {
-                credit.setPenalty(credit.getPenalty() + DEFAULT_PENALTY);
-            }
-            credit.addPenalty();
-            creditRepository.save(credit); // todo: test this.
-        }
+        creditRepository.findAllByStatus(CreditStatus.ACTIVE)
+                .stream()
+                .filter(credit -> credit.getDate().compareTo(Date.valueOf(LocalDate.now().plusDays(credit.getDays()))) >= 0)
+                .forEach(credit -> credit.setStatus(CreditStatus.OVERDUE));
+        creditRepository.findAllByStatus(CreditStatus.OVERDUE)
+                .stream()
+                .filter(credit -> credit.getPenalty() < MAX_PENALTY)
+                .forEach(credit -> credit.setPenalty(credit.getPenalty() + DEFAULT_PENALTY));
+        creditRepository.findAllByStatus(CreditStatus.OVERDUE)
+                .forEach(credit -> {
+                        credit.addPenalty();
+                        creditRepository.save(credit);
+                });
     }
 
     @Override
     public void checkAllCreditAccount() {
-        for (Account account : accountRepository.findAll()) {
-            if (account.getStatus().equals(AccountStatus.WAITING)
-                    && Date.valueOf(LocalDate.now().minusDays(DAYS_BEFORE_ACCOUNT_DECLINED)).compareTo(account.getLastTransactionDate()) == 0) {
-                account.setStatus(AccountStatus.DECLINED);
-                accountRepository.save(account);
-
-                // todo: and send email that account was declined.
-            }
-        }
+        accountRepository.findAllByStatus(AccountStatus.WAITING)
+                .stream()
+                .filter(account -> Date.valueOf(LocalDate.now().minusDays(DAYS_BEFORE_ACCOUNT_DECLINED)).compareTo(account.getLastTransactionDate()) == 0)
+                .forEach(account -> {
+                    account.setStatus(AccountStatus.DECLINED);
+                    accountRepository.save(account);
+                });
+        // todo: and send email that account was declined.
     }
 
     private boolean isYearSameAndMonthNext(Card card) {

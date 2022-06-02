@@ -3,6 +3,7 @@ package com.kami.study.finalProject.repository;
 import com.kami.study.finalProject.model.Account;
 import com.kami.study.finalProject.model.Card;
 import com.kami.study.finalProject.model.User;
+import com.kami.study.finalProject.model.enums.AccountStatus;
 import com.kami.study.finalProject.model.enums.AccountType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -29,4 +30,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     List<Account> findByOwner_MailAndType(String mail, AccountType type);
 
     List<Account> findByType(AccountType type);
+
+    List<Account> findAllByStatus(AccountStatus accountStatus);
 }
