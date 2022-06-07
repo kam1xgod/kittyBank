@@ -12,8 +12,4 @@ public class CreditRequest {
 
     @NotBlank(message = "Fill the input field.")
     private String accountNumber;
-
-    // todo: actually some fields can be empty.
-
-    // todo: this should be only in AdminController.
 }

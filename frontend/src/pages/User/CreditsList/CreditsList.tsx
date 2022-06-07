@@ -14,6 +14,9 @@ const CreditsList: FC = () => {
     const loading: boolean = useSelector((state: AppStateType) => state.user.isLoaded);
     // const userData: Partial<User> =  useSelector((state: AppStateType) => state.user.user);
 
+    // todo: add button for getting new credit with redirect to page where user puts amount.
+    // todo: and may be picks which credit account will be responsible for this.
+
     useEffect(() => {
         dispatch(fetchUserCredits());
         dispatch(fetchUserInfo());

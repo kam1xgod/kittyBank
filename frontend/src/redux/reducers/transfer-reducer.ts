@@ -14,14 +14,16 @@ import { ACTIVATE_ACCOUNT_SUCCESS } from "../action-types/account-action-types";
 export type InitialStateType = {
     transfers: Array<Transfer>,
     transfer: Partial<Transfer>,
-    error: Partial<TransferError>,
+    error: string;
+    errors: Partial<TransferError>,
     loading: boolean
 };
 
 const initialState: InitialStateType = {
     transfers: [],
     transfer: {},
-    error: {},
+    error: "",
+    errors: {},
     loading: false
 };
 

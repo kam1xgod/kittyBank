@@ -6,6 +6,7 @@
   - [General Information](#info)
   - [Screenshot](#screenshot)
   - [Links](#links)
+  - [How to use](#how-to-use)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [Heroku Deployment](#heroku-deployment)
@@ -37,6 +38,18 @@ Later I will also create repository with all tasks from this JavaSchool.
 ### Links
 
 - [CUMyBank](https://sbtfinalproj.herokuapp.com/)
+
+### How to use
+
+#### In general:
+
+- change values in application.properties;
+- check pom.xml;
+- mvn package;
+
+#### With Docker
+
+#### Just jar file
 
 ## My process
 

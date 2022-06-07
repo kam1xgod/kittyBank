@@ -51,7 +51,7 @@ const NavBar: FC = () => {
         <div>
             <div id="header" className="container-fluid header-top d-none d-md-block pb-5 pt-5">
                 {/* <img src="https://i.pinimg.com/564x/be/b5/fd/beb5fd92bdb0e2d8fc1e4328a5d5247e.jpg" className="rounded mx-auto d-block"/> */}
-                <img src="https://i.pinimg.com/564x/82/0d/35/820d354ecc2f2624b7f841d1b79d14d4.jpg" className="rounded mx-auto d-block"/>
+                <img src="https://i.imgur.com/i4y7Alt.png" className="rounded mx-auto d-block"/>
             </div>
             <div className="container-fluid bg-black">
                 <nav id="navbar-main" className={`container navbar navbar-expand-lg bg-black text-white `}

@@ -11,10 +11,11 @@ import { validateAmount } from "../../../utils/input-validators";
 const CreateTransfer: FC = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const error: string = useSelector((state: AppStateType) => state.transfer.error)
     const transferData: Partial<Transfer> = useSelector((state: AppStateType) => state.transfer.transfer);
     const transfers: Array<Transfer> = useSelector((state: AppStateType) => state.transfer.transfers)
     const userAccountsData: Array<Account> = useSelector((state: AppStateType) => state.account.accounts);
-    const errors: Partial<TransferError> = useSelector((state: AppStateType) => state.transfer.error);
+    const errors: Partial<TransferError> = useSelector((state: AppStateType) => state.transfer.errors);
     const loading: boolean = useSelector((state: AppStateType) => state.user.isLoaded);
 
     const [amount, setAmount] = useState<number | undefined>(transferData.amount);
@@ -63,6 +64,7 @@ const CreateTransfer: FC = () => {
             <h4 className="mb-4 text-center">
                 Create transfer
             </h4>
+            {error ? <div className="alert alert-danger col-6" role="alert">{error}</div> : null}
             <br />
             <form onSubmit={onFormSubmit}>
                 <div className="row">

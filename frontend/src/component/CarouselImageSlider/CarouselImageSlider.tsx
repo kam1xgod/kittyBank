@@ -5,11 +5,11 @@ import {Link} from "react-router-dom";
 const sliderItems = [
     {
         name: "contacts",
-        url: "https://www.pixelstalk.net/wp-content/uploads/2016/05/Black-And-White-Wallpaper-HD.jpg"
+        url: "https://i.imgur.com/dVJ7Ggo.png"
     },
     {
         name: "savings/plans",
-        url: "https://www.pixelstalk.net/wp-content/uploads/2016/05/Black-And-White-HD-Backgrounds.jpg"
+        url: "https://i.imgur.com/adJtj1a.png"
     },
 ];
 

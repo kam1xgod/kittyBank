@@ -27,9 +27,6 @@ public class CreditController {
         return ResponseEntity.ok(creditMapper.create(creditRequest, bindingResult));
     }
 
-    // todo: may be just add new type?
-    // todo: like.. Account is requested..
-
     @GetMapping("/request/{mail}")
     public ResponseEntity<CreditAccountRequestResponse> requestNewCreditAccount(@PathVariable String mail) {
         return ResponseEntity.ok(requestMapper.create(mail));

@@ -1,5 +1,4 @@
-import { Transfer, TransferError } from "../../types/types";
-import { showLoader } from "../actions/auth-actions";
+import { Transfer } from "../../types/types";
 import { ShowLoaderActionType } from "./auth-action-types";
 
 export const FETCH_ACCOUNT_TRANSFERS_SUCCESS = "FETCH_ACCOUNT_TRANSFERS_SUCCESS";
@@ -12,7 +11,7 @@ export type FetchAccountTransfersSuccessActionType = { type: typeof FETCH_ACCOUN
 export type FetchUserTransfersSuccessActionType = { type: typeof FETCH_USER_TRANSFERS_SUCCESS, payload: Array<Transfer> };
 export type FetchTransferSuccessActionType = { type: typeof FETCH_TRANSFER_SUCCESS, payload: Transfer };
 export type TransferAddedSuccessActionType = { type: typeof TRANSFER_ADDED_SUCCESS, payload: Transfer };
-export type TransferAddedFailureActionType = { type: typeof TRANSFER_ADDED_FAILURE, payload: TransferError };
+export type TransferAddedFailureActionType = { type: typeof TRANSFER_ADDED_FAILURE, payload: string };
 
 export type TransferActionTypes = FetchAccountTransfersSuccessActionType | FetchTransferSuccessActionType |
     TransferAddedFailureActionType | TransferAddedSuccessActionType |

@@ -22,7 +22,7 @@ export const transferAddedSuccess = (transfer: Transfer): TransferAddedSuccessAc
     payload: transfer
 });
 
-export const transferAddedFailure = (error: TransferError): TransferAddedFailureActionType => ({
+export const transferAddedFailure = (error: string): TransferAddedFailureActionType => ({
     type: TRANSFER_ADDED_FAILURE,
     payload: error
 });

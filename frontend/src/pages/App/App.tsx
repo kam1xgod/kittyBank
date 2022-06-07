@@ -32,9 +32,21 @@ const App: FC = () => {
                 <Route exact path="/savings/plans" component={SavingPlans} />
                 <Route path="/savings/create" component={() => <CreateSavingPlan />} />
                 {localStorage.getItem("token") ?
-                localStorage.getItem("role") === 'ADMIN' ?
-                <Route path="/admin" component={AdminPanel}/> : <Route path="/user" component={User}/>
-                : <Route path="/" component={HomePage} />}
+                    localStorage.getItem("role") === 'ADMIN' ?
+                        <Route path="/admin" component={AdminPanel} /> : <Route path="/user" component={User} />
+                    : <Route path="/" component={HomePage} />}
+                <Route path="/github" component={() => {
+                    window.location.replace("https://github.com/kam1xgod");
+                    return null;
+                }} />
+                <Route path="/telegram" component={() => {
+                    window.location.replace("https://t.me/kam1xgod");
+                    return null;
+                }} />
+                <Route path="/instagram" component={() => {
+                    window.location.replace("https://instagram.com/");
+                    return null;
+                }} />
             </Switch>
             <Footer />
         </>

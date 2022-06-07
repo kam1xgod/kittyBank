@@ -28,7 +28,7 @@ export const addTransfer = (data: FormData, history: any) => async (dispatch: Di
         // localStorage.removeItem()
         dispatch(transferAddedSuccess(response.data));
     } catch (error) {
-        dispatch(transferAddedFailure(error.response?.data));
+        dispatch(transferAddedFailure(error.response.data));
     }
 };
 
