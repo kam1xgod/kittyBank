@@ -8,6 +8,7 @@ import {fetchAllUsers} from "../../../redux/thunks/admin-thunks";
 import {AppStateType} from "../../../redux/reducers/root-reducer";
 import {User} from "../../../types/types";
 import Spinner from '../../../component/Spinner/Spinner';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const UsersList: FC = () => {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const UsersList: FC = () => {
         <div className="container">
             {loading ? <Spinner/> :
             <>
-                <h4><FontAwesomeIcon className="ml-2 mr-2" icon={faUsers}/> List of all users</h4>
+                <h4><FontAwesomeIcon className="ml-2 mr-2" icon={faUsers as IconProp}/> List of all users</h4>
                 <table className="table mt-4 border text-center">
                     <thead className="table-active">
                     <tr>

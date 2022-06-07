@@ -21,6 +21,7 @@ import CreateSavingPlan from './ManageSavingPlan/CreateSavingPlan';
 import CreditCardRequests from './CreditCardRequests/CreditCardRequests';
 import CreateCreditAccount from './CreateCreditAccount/CreateCreditAccount';
 import CreditCardRequestDecline from './CreditCardRequests/CreditCardRequestDecline';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const AdminPanel: FC = () => {
     const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const AdminPanel: FC = () => {
         <div className="admin-container container">
             <div className="row mt-5">
                 <div className="col-md-2">
-                    <h4><FontAwesomeIcon className="mr-2" icon={faUser} />Admin</h4>
+                    <h4><FontAwesomeIcon className="mr-2" icon={faUser as IconProp} />Admin</h4>
                     <NavLink to={"/admin/users"}
                         className="admin-sidebar-link nav-link"
                         activeClassName="is-active">Users</NavLink>

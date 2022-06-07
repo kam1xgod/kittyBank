@@ -16,11 +16,15 @@ const Footer: FC = () => {
                     </div>
                     <div className="footer-right">
                         <h3>Contact me:</h3>
-                            <Link to="/github"><span><i className="fab fa-github fa-2x mr-3" style={{ color: "#EF484C" }}></i></span></Link>
-                            <Link to="/instagram"><span><i className="fab fa-instagram fa-2x mr-3" style={{ color: "#EF484C" }}></i></span></Link>
-                            <Link to="/telegram"><span><i className="fab fa-telegram fa-2x mr-3" style={{ color: "#EF484C" }}></i></span></Link>
-                        {/* <a href="/github"> */}
-                        {/* </a> */}
+                        <a href="https://github.com/kam1xgod">
+                            <i className="fab fa-github fa-2x mr-3" style={{ color: "#EF484C" }}></i>
+                        </a>
+                        <a href="https://t.me/kam1xgod">
+                            <i className="fab fa-instagram fa-2x mr-3" style={{ color: "#EF484C" }}></i>
+                        </a>
+                        <a href="https://instagram.com/">
+                            <i className="fab fa-telegram fa-2x mr-3" style={{ color: "#EF484C" }}></i>
+                        </a>
                         <p>(please, don't)</p>
                     </div>
                 </div>

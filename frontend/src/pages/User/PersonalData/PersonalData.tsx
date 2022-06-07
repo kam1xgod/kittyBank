@@ -8,6 +8,7 @@ import {User} from "../../../types/types";
 import {AppStateType} from "../../../redux/reducers/root-reducer";
 import EditPersonalData from "../EditPersonalData/EditPersonalData";
 import "./PersonalData.css";
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const PersonalData: FC = () => {
     const usersData: Partial<User> = useSelector((state: AppStateType) => state.user.user);
@@ -18,7 +19,7 @@ const PersonalData: FC = () => {
         <div className="row">
             <div className="personal_data col-md-5">
                 <h4 className="personal_data_title">
-                    <FontAwesomeIcon className="ml-2 mr-2" icon={faAddressCard}/>Personal data
+                    <FontAwesomeIcon className="ml-2 mr-2" icon={faAddressCard as IconProp}/>Personal data
                 </h4>
                 <p className="personal_data_item">Email:
                     <span className="personal_data_text">{mail}</span>
@@ -31,10 +32,10 @@ const PersonalData: FC = () => {
                 </p>
                 {location.pathname === "/user/info" ?
                     <Link to={"/user/info/edit"} className="btn btn-dark personal_data_btn">
-                        <FontAwesomeIcon className="mr-2" icon={faEdit}/> Edit
+                        <FontAwesomeIcon className="mr-2" icon={faEdit as IconProp}/> Edit
                     </Link> :
                     <Link to={"/user/info"} className="btn btn-dark personal_data_btn">
-                        <FontAwesomeIcon className="mr-2" icon={faEyeSlash}/> Hide
+                        <FontAwesomeIcon className="mr-2" icon={faEyeSlash as IconProp}/> Hide
                     </Link>}
             </div>
             <div className="col-md-7">

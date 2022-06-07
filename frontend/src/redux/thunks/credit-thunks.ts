@@ -24,6 +24,7 @@ export const addCredit = (data: FormData, history: any) => async (dispatch: Disp
         // localStorage.removeItem()
         dispatch(creditAddedSuccess(response.data));
     } catch (error) {
+        // @ts-ignore
         dispatch(creditAddedFailure(error.response?.data));
     }
 };

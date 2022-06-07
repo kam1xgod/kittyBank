@@ -23,6 +23,7 @@ export const addSavingPlan = (data: FormData, history: any) => async (dispatch: 
         // localStorage.removeItem()
         dispatch(savingPlanAddedSuccess(response.data));
     } catch (error) {
+        // @ts-ignore
         dispatch(savingPlanAddedFailure(error.response?.data));
     }
 };
@@ -34,6 +35,7 @@ export const editSavingPlan = (id: string, data: FormData, history: any) => asyn
         history.push("/account/finalize");
         dispatch(savingPlanEditedSuccess(response.data));
     } catch (error) {
+        // @ts-ignore
         dispatch(savingPlanEditedFailure(error.response?.data));
     }
 }

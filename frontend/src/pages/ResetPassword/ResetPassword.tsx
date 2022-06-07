@@ -7,6 +7,7 @@ import {fetchResetPasswordCode, formReset, resetPassword} from "../../redux/thun
 import {RouteComponentProps, useHistory} from "react-router-dom";
 import {AppStateType} from "../../redux/reducers/root-reducer";
 import {AuthErrors, User, UserResetPasswordData} from "../../types/types";
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const ResetPassword: FC<RouteComponentProps<{ code: string }>> = ({match}) => {
     const dispatch = useDispatch();
@@ -34,14 +35,14 @@ const ResetPassword: FC<RouteComponentProps<{ code: string }>> = ({match}) => {
 
     return (
         <div className="container mt-5">
-            <h4><FontAwesomeIcon className="mr-2" icon={faSync}/> RESET PASSWORD</h4>
+            <h4><FontAwesomeIcon className="mr-2" icon={faSync as IconProp}/> RESET PASSWORD</h4>
             <hr/>
             {error ?
                 <div className="alert alert-danger col-6" role="alert">{error}</div> : null}
             <form onSubmit={onClickReset}>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Password: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock}/>
+                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock as IconProp}/>
                     <div className="col-sm-4">
                         <input
                             type="password"
@@ -54,7 +55,7 @@ const ResetPassword: FC<RouteComponentProps<{ code: string }>> = ({match}) => {
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Confirm password: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock}/>
+                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock as IconProp}/>
                     <div className="col-sm-4">
                         <input
                             type="password"
@@ -67,7 +68,7 @@ const ResetPassword: FC<RouteComponentProps<{ code: string }>> = ({match}) => {
                 </div>
                 <div className="form-group row">
                     <button type="submit" className="btn btn-dark mx-3">
-                        <FontAwesomeIcon className="mr-3" icon={faUndo}/>Reset
+                        <FontAwesomeIcon className="mr-3" icon={faUndo as IconProp}/>Reset
                     </button>
                 </div>
             </form>

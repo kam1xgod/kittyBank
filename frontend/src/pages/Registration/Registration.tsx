@@ -8,6 +8,7 @@ import {formReset, registration} from "../../redux/thunks/auth-thunks";
 import PageLoader from "../../component/PageLoader/PageLoader";
 import {AppStateType} from "../../redux/reducers/root-reducer";
 import {AuthErrors, UserRegistration} from "../../types/types";
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const Registration: FC = () => {
     const dispatch = useDispatch();
@@ -55,7 +56,7 @@ const Registration: FC = () => {
     return (
         <div className="container mt-5">
             {pageLoading}
-            <h4><FontAwesomeIcon className="mr-2" icon={faUserPlus}/> SIGN UP</h4>
+            <h4><FontAwesomeIcon className="mr-2" icon={faUserPlus as IconProp}/> SIGN UP</h4>
             <hr/>
             {isRegistered ? <div className="alert alert-success col-6" role="alert">
                 Activation code has been sent to your email!
@@ -63,7 +64,7 @@ const Registration: FC = () => {
             <form onSubmit={onClickSignUp}>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">E-mail: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faEnvelope}/>
+                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faEnvelope as IconProp}/>
                     <div className="col-sm-4">
                         <input
                             type="mail"
@@ -76,7 +77,7 @@ const Registration: FC = () => {
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">First name: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faUser}/>
+                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faUser as IconProp}/>
                     <div className="col-sm-4">
                         <input
                             type="text"
@@ -89,7 +90,7 @@ const Registration: FC = () => {
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Last name: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faUser}/>
+                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faUser as IconProp}/>
                     <div className="col-sm-4">
                         <input
                             type="text"
@@ -102,7 +103,7 @@ const Registration: FC = () => {
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Password: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock}/>
+                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock as IconProp}/>
                     <div className="col-sm-4">
                         <input
                             type="password"
@@ -115,7 +116,7 @@ const Registration: FC = () => {
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Confirm password: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock}/>
+                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock as IconProp}/>
                     <div className="col-sm-4">
                         <input
                             type="password"
@@ -128,7 +129,7 @@ const Registration: FC = () => {
                 </div>
                 <div className="form-group row">
                     <button type="submit" className="btn btn-dark mx-3">
-                        <FontAwesomeIcon className="mr-2" icon={faUserPlus}/>Sign up
+                        <FontAwesomeIcon className="mr-2" icon={faUserPlus as IconProp}/>Sign up
                     </button>
                 </div>
                 {/* <ReCAPTCHA onChange={onChangeRecaptcha} sitekey="6Lc5cLkZAAAAAN8mFk85HQieB9toPcWFoW0RXCNR"/> */}

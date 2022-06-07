@@ -26,6 +26,7 @@ export const updateUserInfo = (userEdit: UserEdit) => async (dispatch: Dispatch)
         const response = await RequestService.put("/user/edit", userEdit, true);
         dispatch(userUpdatedSuccess(response.data));
     } catch (error) {
+        // @ts-ignore
         dispatch(userUpdatedFailure(error.response.data));
     }
 };
@@ -35,6 +36,7 @@ export const updateUserPassword = (data: UserResetPasswordData) => async (dispat
         const response = await RequestService.put("/auth/edit/password", data, true);
         dispatch(userUpdatedPasswordSuccess(response.data));
     } catch (error) {
+        // @ts-ignore
         dispatch(userUpdatedPasswordFailure(error.response.data));
     }
 };

@@ -7,6 +7,7 @@ import {faSignInAlt, faSignOutAlt, faUser, faUserPlus} from "@fortawesome/free-s
 import {logout} from "../../redux/thunks/auth-thunks";
 import "./NavBar.css";
 import {AppStateType} from "../../redux/reducers/root-reducer";
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const NavBar: FC = () => {
     const dispatch = useDispatch();
@@ -23,12 +24,12 @@ const NavBar: FC = () => {
         links = (
             <li className="nav-item">
                 <Link to={localStorage.getItem("role") === 'ADMIN' ? "/admin" : "/user"}><span className="nav-link pl-5 pr-5">
-                         <FontAwesomeIcon className="mr-2" icon={faUser}/>MY ACCOUNT</span></Link>
+                         <FontAwesomeIcon className="mr-2" icon={faUser as IconProp}/>MY ACCOUNT</span></Link>
             </li>
         );
         signOut = (
             <Link to={"/"} onClick={handleLogout}>
-                <FontAwesomeIcon className="mr-2" icon={faSignOutAlt}/>EXIT
+                <FontAwesomeIcon className="mr-2" icon={faSignOutAlt as IconProp}/>EXIT
             </Link>
         );
     } else {
@@ -36,11 +37,11 @@ const NavBar: FC = () => {
             <>
                 <li className="nav-item">
                     <Link to={"/login"} className="nav-link pl-5 pr-3">
-                        <FontAwesomeIcon className="mr-2" icon={faSignInAlt}/>SIGN IN</Link>
+                        <FontAwesomeIcon className="mr-2" icon={faSignInAlt as IconProp}/>SIGN IN</Link>
                 </li>
                 <li className="nav-item">
                     <Link to={"/registration"} className="nav-link">
-                        <FontAwesomeIcon className="mr-2" icon={faUserPlus}/>SIGN UP</Link>
+                        <FontAwesomeIcon className="mr-2" icon={faUserPlus as IconProp}/>SIGN UP</Link>
                 </li>
             </>
         );

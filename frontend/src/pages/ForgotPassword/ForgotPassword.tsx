@@ -7,6 +7,7 @@ import {forgotPassword, formReset} from "../../redux/thunks/auth-thunks";
 import {validateEmail} from "../../utils/input-validators";
 import PageLoader from "../../component/PageLoader/PageLoader";
 import {AppStateType} from "../../redux/reducers/root-reducer";
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const ForgotPassword: FC = () => {
     const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const ForgotPassword: FC = () => {
     return (
         <div id="container" className="container mt-5">
             {pageLoading}
-            <h4><FontAwesomeIcon className="mr-3" icon={faKey}/>FORGOT PASSWORD?</h4>
+            <h4><FontAwesomeIcon className="mr-3" icon={faKey as IconProp}/>FORGOT PASSWORD?</h4>
             <hr/>
             <p>Enter your email address that you used to create your account.</p>
             {error ? <div className="alert alert-danger col-6" role="alert">{error}</div> : null}
@@ -52,7 +53,7 @@ const ForgotPassword: FC = () => {
             <form onSubmit={onClickSend}>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">E-mail: </label>
-                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faEnvelope}/>
+                    <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faEnvelope as IconProp}/>
                     <div className="col-sm-4">
                         <input
                             type="mail"
@@ -65,7 +66,7 @@ const ForgotPassword: FC = () => {
                 </div>
                 <div className="form-group row">
                     <button type="submit" className="btn btn-dark mx-3">
-                        <FontAwesomeIcon className="mr-3" icon={faPaperPlane}/>Send
+                        <FontAwesomeIcon className="mr-3" icon={faPaperPlane as IconProp}/>Send
                     </button>
                 </div>
             </form>

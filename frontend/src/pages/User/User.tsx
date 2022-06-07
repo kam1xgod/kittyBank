@@ -17,6 +17,7 @@ import ManageTransfer from './ManageTransfer/ManageTransfer';
 import CreateTransfer from './CreateTransfer/CreateTransfer';
 import CreateAccount from './CreateAccount/CreateAccount';
 import CreditsList from './CreditsList/CreditsList';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const User: FC = () => {
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const User: FC = () => {
         <div className="user-container container">
             <div className="row mt-5">
                 <div className="col-md-2">
-                    <h4><FontAwesomeIcon className="mr-2" icon={faUser} />
+                    <h4><FontAwesomeIcon className="mr-2" icon={faUser as IconProp} />
                         <NavLink to={"/user"}
                             className="user-sidebar-link">My Account</NavLink>
                     </h4>

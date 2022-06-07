@@ -9,6 +9,7 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { AppStateType } from "../../../redux/reducers/root-reducer";
 import { Account, Transfer } from "../../../types/types";
 import Spinner from '../../../component/Spinner/Spinner';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const ManageAccount: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
     const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const ManageAccount: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
             <div className="container">
                 {loading ? <Spinner /> :
                     <>
-                        <h5 style={{ textAlign: "center" }}><FontAwesomeIcon className="mr-2" icon={faIdCard} /> Account #{id}</h5>
+                        <h5 style={{ textAlign: "center" }}><FontAwesomeIcon className="mr-2" icon={faIdCard as IconProp} /> Account #{id}</h5>
                         <div className="row mt-5 mb-4 border px-3 py-3">
                             <div className="col-md-4">
                                 <p className="personal_data_item">Balance:
@@ -66,7 +67,7 @@ const ManageAccount: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
                                 <p className="personal_data_item">This type of account can't have any card.</p>
                             </> :
                             <>
-                                <h5 style={{ textAlign: "center" }}><FontAwesomeIcon className="mr-2" icon={faCreditCard} />Card:</h5>
+                                <h5 style={{ textAlign: "center" }}><FontAwesomeIcon className="mr-2" icon={faCreditCard as IconProp} />Card:</h5>
                                 <div className="row mt-5 mb-4 border px-3 py-3">
                                     <div className="col-md-4">
                                         <p className="personal_data_item">Number:

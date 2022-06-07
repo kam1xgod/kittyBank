@@ -5,6 +5,7 @@ import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import { Credit } from "../../types/types";
 import Spinner from "../Spinner/Spinner";
 import { Link } from 'react-router-dom';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 type PropsType = {
     credits: Array<Credit>
@@ -16,7 +17,7 @@ const TransfersTable: FC<PropsType> = ({ loading, credits }) => {
         <div className="container">
             {loading ? <Spinner /> :
                 <>
-                    <h4><FontAwesomeIcon className="ml-2 mr-2" icon={faAddressCard} />Credits:</h4>
+                    <h4><FontAwesomeIcon className="ml-2 mr-2" icon={faAddressCard as IconProp} />Credits:</h4>
                     <table className="table mt-4 border text-center">
                         <thead className="table-active">
                             <tr>

@@ -10,6 +10,7 @@ import {AppStateType} from "../../../redux/reducers/root-reducer";
 import {Account, Transfer} from "../../../types/types";
 import Spinner from '../../../component/Spinner/Spinner';
 import { accountTypeList } from '../../../utils/constants/types';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const ManageAccount: FC<RouteComponentProps<{ id: string }>> = ({match}) => {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const ManageAccount: FC<RouteComponentProps<{ id: string }>> = ({match}) => {
             <div className="container">
                 {loading ? <Spinner/> :
                     <>
-                        <h4><FontAwesomeIcon className="mr-2" icon={faUserEdit}/> Account #{number}</h4>
+                        <h4><FontAwesomeIcon className="mr-2" icon={faUserEdit as IconProp}/> Account #{number}</h4>
                         <div className="row mt-5 mb-4 border px-3 py-3">
                             <div className="col-md-4">
                                 <p className="personal_data_item">Balance:
@@ -111,7 +112,7 @@ const ManageAccount: FC<RouteComponentProps<{ id: string }>> = ({match}) => {
                                 <p className="personal_data_item">This type of account can't have any card.</p>
                             </> :
                             <>
-                                <h5 style={{ textAlign: "center" }}><FontAwesomeIcon className="mr-2" icon={faCreditCard} />Card:</h5>
+                                <h5 style={{ textAlign: "center" }}><FontAwesomeIcon className="mr-2" icon={faCreditCard as IconProp} />Card:</h5>
                                 <div className="row mt-5 mb-4 border px-3 py-3">
                                     <div className="col-md-4">
                                         <p className="personal_data_item">Number:

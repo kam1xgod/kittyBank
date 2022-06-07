@@ -8,6 +8,7 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { AppStateType } from "../../../redux/reducers/root-reducer";
 import { Transfer } from "../../../types/types";
 import Spinner from '../../../component/Spinner/Spinner';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const ManageTransfer: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const ManageTransfer: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
             <div className="container">
                 {loading ? <Spinner /> :
                     <>
-                        <h5 style={{ textAlign: "center" }}><FontAwesomeIcon className="mr-2" icon={faIdCard} /> Transfer #{id}</h5>
+                        <h5 style={{ textAlign: "center" }}><FontAwesomeIcon className="mr-2" icon={faIdCard as IconProp} /> Transfer #{id}</h5>
                         <div className="row mt-5 mb-4 border px-3 py-3">
                             <div className="col-md-4">
                                 <p className="personal_data_item">Date and time:

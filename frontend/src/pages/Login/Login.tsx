@@ -11,6 +11,7 @@ import {UserData} from "../../types/types";
 // import facebookLogo from "../../img/facebook.png";
 // import githubLogo from "../../img/github.png";
 import "./Login.css";
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const Login: FC<RouteComponentProps<{ code: string }>> = ({match}) => {
     const dispatch = useDispatch();
@@ -38,14 +39,14 @@ const Login: FC<RouteComponentProps<{ code: string }>> = ({match}) => {
         <div id="container" className="container mt-5">
             <div className="row">
                 <div className="col-md-6">
-                    <h4><FontAwesomeIcon className="mr-3" icon={faSignInAlt}/>SIGN IN</h4>
+                    <h4><FontAwesomeIcon className="mr-3" icon={faSignInAlt as IconProp}/>SIGN IN</h4>
                     <hr/>
                     {error ? <div className="alert alert-danger col-6" role="alert">{error}</div> : null}
                     {success ? <div className="alert alert-success col-6" role="alert">{success}</div> : null}
                     <form onSubmit={onClickSignIn}>
                         <div className="form-group row">
                             <label className="col-sm-4 col-form-label">E-mail: </label>
-                            <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faEnvelope}/>
+                            <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faEnvelope as IconProp}/>
                             <div className="col-sm-7">
                                 <input
                                     className="form-control"
@@ -57,7 +58,7 @@ const Login: FC<RouteComponentProps<{ code: string }>> = ({match}) => {
                         </div>
                         <div className="form-group row">
                             <label className="col-sm-4 col-form-label">Password: </label>
-                            <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock}/>
+                            <FontAwesomeIcon style={{position: "relative", top: "8px"}} icon={faLock as IconProp}/>
                             <div className="col-sm-7">
                                 <input
                                     className="form-control"
@@ -69,7 +70,7 @@ const Login: FC<RouteComponentProps<{ code: string }>> = ({match}) => {
                         </div>
                         <div className="form-group row">
                             <button type="submit" className="btn btn-dark mx-3">
-                                <FontAwesomeIcon className="mr-3" icon={faSignInAlt}/>Sign in
+                                <FontAwesomeIcon className="mr-3" icon={faSignInAlt as IconProp}/>Sign in
                             </button>
                             <Link to={"/forgot"} style={{position: "relative", top: "8px"}}>Forgot password?</Link>
                         </div>

@@ -24,6 +24,7 @@ export const addAccount = (data: FormData, history: any) => async (dispatch: Dis
         // localStorage.removeItem()
         dispatch(accountAddedSuccess(response.data));
     } catch (error) {
+        // @ts-ignore
         dispatch(accountAddedFailure(error.response?.data));
     }
 };
@@ -39,6 +40,7 @@ export const activateAccount = (code: string) => async (dispatch: Dispatch) => {
         const response = await RequestService.get("/account/activate/" + code, true);
         dispatch(activateAccountSuccess(response.data));
     } catch (error) {
+        // @ts-ignore
         dispatch(activateAccountFailure(error.response.data));
     }
 };

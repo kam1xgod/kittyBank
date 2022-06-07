@@ -8,6 +8,7 @@ import { AppStateType } from "../../../redux/reducers/root-reducer";
 import { Credit } from "../../../types/types";
 import Spinner from '../../../component/Spinner/Spinner';
 import { fetchCreditInfo } from '../../../redux/thunks/admin-thunks';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const ManageCredit: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
     const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const ManageCredit: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
         <div className="container">
             {loading ? <Spinner /> :
                 <>
-                    <h4><FontAwesomeIcon className="mr-2" icon={faUserEdit} /> Credit #{id}</h4>
+                    <h4><FontAwesomeIcon className="mr-2" icon={faUserEdit as IconProp} /> Credit #{id}</h4>
                     <div className="row mt-5 mb-4 border px-3 py-3">
                         <div className="col-md-4">
                             <p className="personal_data_item">Date:

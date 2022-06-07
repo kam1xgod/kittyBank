@@ -5,6 +5,7 @@ import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 
 import { Account } from "../../types/types";
 import Spinner from "../Spinner/Spinner";
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 type PropsType = {
     accounts: Array<Account>
@@ -16,7 +17,7 @@ const AccountsTable: FC<PropsType> = ({ loading, accounts }) => {
         <div className="container">
             {loading ? <Spinner /> :
                 <>
-                    <h4><FontAwesomeIcon className="ml-2 mr-2" icon={faAddressCard} />Accounts:</h4>
+                    <h4><FontAwesomeIcon className="ml-2 mr-2" icon={faAddressCard as IconProp} />Accounts:</h4>
                     <table className="table mt-4 border text-center">
                         <thead className="table-active">
                             <tr>

@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../redux/reducers/root-reducer";
 import {resetForm, updateUserInfo} from '../../../redux/thunks/user-thunks';
 import "./EditPersonalData.css";
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const EditPersonalData: FC = () => {
     const dispatch = useDispatch();
@@ -59,7 +60,7 @@ const EditPersonalData: FC = () => {
                     </div>
                 </div>
                 <button type="submit" className="btn btn-dark">
-                    <FontAwesomeIcon className="mr-2" icon={faCheck}/>Save
+                    <FontAwesomeIcon className="mr-2" icon={faCheck as IconProp}/>Save
                 </button>
             </form>
         </>
