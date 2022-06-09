@@ -47,7 +47,7 @@ const CreditCardRequests: FC = () => {
                                         }}
                                             className="admin-sidebar-link nav-link border my-2 px-2 py-2"
                                             activeClassName="is-active"
-                                            style={{ backgroundColor: "aquamarine", textAlign: "center" }}>Decline</NavLink>
+                                            style={{ backgroundColor: "#43506C", color: "#E9E9EB", textAlign: "center" }}>Decline</NavLink>
                                     </th>
                                     <th>
                                         <NavLink to={{
@@ -56,7 +56,7 @@ const CreditCardRequests: FC = () => {
                                         }}
                                             className="admin-sidebar-link nav-link border my-2 px-2 py-2"
                                             activeClassName="is-active"
-                                            style={{ backgroundColor: "aquamarine", textAlign: "center" }}>Approve</NavLink>
+                                            style={{ backgroundColor: "#43506C", color: "#E9E9EB", textAlign: "center" }}>Approve</NavLink>
                                     </th>
                                 </tr>
                             )

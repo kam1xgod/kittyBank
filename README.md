@@ -1,4 +1,4 @@
-# SbtJavaSchool - Online banking (idk).
+# SbtJavaSchool - Kitty Bank.
 
 ## Table of contents
 

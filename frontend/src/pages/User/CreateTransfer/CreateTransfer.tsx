@@ -108,7 +108,7 @@ const CreateTransfer: FC = () => {
                                 <div className="invalid-feedback">{recipientNumberError}</div>
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary btn-lg btn-success px-5 float-right">
+                        <button type="submit" className="btn btn-primary btn-lg px-5 float-right">
                             Validate transfer
                         </button>
                     </div>

@@ -56,7 +56,7 @@ const SavingPlans: FC = () => {
                         <p>Years: {savingPlan.years}</p>
                         <p>Min amount: {savingPlan.min}</p>
                         <p>Max amount: {savingPlan.max}</p>
-                        <button type="submit" className="btn btn-primary btn-lg btn-success px-5 float-right" onClick={buttonClickHandler(savingPlan)}>
+                        <button type="submit" className="btn btn-primary btn-lg px-5 float-right" onClick={buttonClickHandler(savingPlan)}>
                             Open
                         </button>
                     </div>

@@ -114,7 +114,7 @@ const CreateCreditAccount: FC<RouteComponentProps<{ mail: string }>> = ({ match 
                                     <div className="invalid-feedback">{percentageError}</div>
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-primary btn-lg btn-success px-5 float-right">
+                            <button type="submit" className="btn btn-primary btn-lg px-5 float-right">
                                 Validate account
                             </button>
                         </div>

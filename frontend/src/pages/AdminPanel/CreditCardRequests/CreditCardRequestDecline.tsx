@@ -18,7 +18,7 @@ const CreditCardRequestDecline: FC<RouteComponentProps<{ mail: string }>> = ({ m
     return (
         <div className="container">
             {loading ? <Spinner /> : <>
-            <p>Hello</p>
+            <p>Successfully declined!</p>
             </>}
         </div>
     )

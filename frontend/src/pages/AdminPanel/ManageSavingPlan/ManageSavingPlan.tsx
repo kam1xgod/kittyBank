@@ -184,7 +184,7 @@ const ManageSavingPlan: FC<RouteComponentProps<{ id: string }>> = ({ match }) =>
                                     </div>
                                 </div>
                                 <div className="container" style={{ display: "flex", justifyContent: "center" }}>
-                                    <button type="submit" className="btn btn-primary btn-lg btn-success px-5 float-right">
+                                    <button type="submit" className="btn btn-primary btn-lg px-5 float-right">
                                         Validate saving plan
                                     </button>
                                 </div>

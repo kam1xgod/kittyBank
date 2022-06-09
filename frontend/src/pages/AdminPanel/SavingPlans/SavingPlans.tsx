@@ -38,21 +38,21 @@ const SavingPlans: FC = () => {
                             }}
                                 className="admin-sidebar-link nav-link border my-2 px-2 py-2"
                                 activeClassName="is-active"
-                                style={{ backgroundColor: "aquamarine", textAlign: "center" }}>Edit</NavLink>
+                                style={{ backgroundColor: "#43506C", color: "#E9E9EB", textAlign: "center" }}>Edit</NavLink>
                             <NavLink to={{
                                 pathname: `/admin/savings/${savingPlan.id}/delete`,
                                 state: savingPlan
                             }}
                                 className="admin-sidebar-link nav-link border my-2 px-2 py-2"
                                 activeClassName="is-active"
-                                style={{ backgroundColor: "aquamarine", textAlign: "center" }}>Delete</NavLink>
+                                style={{ backgroundColor: "#43506C", color: "#E9E9EB", textAlign: "center" }}>Delete</NavLink>
                         </div>
                     )
                 })}
                 <NavLink to={"/savings/create"}
                     className="admin-sidebar-link nav-link border my-2 px-2 py-2"
                     activeClassName="is-active"
-                    style={{ backgroundColor: "aquamarine", textAlign: "center" }}>Add new</NavLink>
+                    style={{ backgroundColor: "#43506C", color: "#E9E9EB", textAlign: "center" }}>Add new</NavLink>
             </>}
         </div>
     )
