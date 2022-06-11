@@ -1,0 +1,45 @@
+# Here we can describe what services we need and how and where to start them.
+
+# Check Docker documentation for information 'bout versions: https://docs.docker.com/compose/compose-file/compose-versioning/
+version: '3'
+
+# Creating services that will start with our app.
+# Because I have database somewhere else - I don't need special service for it.
+
+services:
+#  mysql:
+  # "image" same as "FROM" in Dockerfile. We are searching this image from dockerhub.
+#    image: 'mysql:8.0'
+  # Adding name for our service.
+#    container_name: 'database'
+  # Some environment values. In this example with MySQL database - user, password and database name.
+#    environment:
+#      - 'MYSQL_USER=user'
+#      - 'MYSQL_PASSWORD=password'
+#      - 'MYSQL_DB=DB name'
+
+# And we can access this container via "docker exec -it *container-name* bash". I guess..
+
+# But with app we have some problems.
+
+  backend:
+    # Because it's not in dockerhub - we should provide path for building image instead of "image".
+    build: ./
+    # Here we are providing name for our image.
+    container_name: 'sbt_final_back'
+    # And ports. Because in most systems 8080 doesn't belong to anyone - we can use them.
+    volumes:
+      - ./backend:/app/backend
+    ports:
+      - '8080:8080'
+
+# You can run this with "docker-compose up" command. And you can add "-d" option to start it as daemon.
+
+  frontend:
+    build: ./frontend/
+    container_name: 'sbt_final_front'
+    volumes:
+      - ./frontend:/app/frontend
+    ports:
+      - '3000:3000'
+
