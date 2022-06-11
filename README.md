@@ -43,13 +43,20 @@ Later I will also create repository with all tasks from this JavaSchool.
 
 #### In general:
 
-- change values in application.properties;
-- check pom.xml;
+- change values in application.properties and /frontend/src/utils/constants/url.ts;
+- check pom.xml and update dependecies if needed;
 - mvn package;
 
 #### With Docker
 
+- docker-compose up;
+
 #### Just jar file
+
+- java -jar /target/finalProject-0.0.1-SNAPSHOT.jar;
+- cd frontend;
+- yarn install;
+- yarn start;
 
 ## My process
 
