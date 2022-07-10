@@ -31,7 +31,7 @@ const CreateCredit: FC = () => {
   )
 
   const [amount, setAmount] = useState<number | undefined>(creditData.amount)
-  const [account, setAccount] = useState<string | undefined>(creditData.account)
+  const [accountNumber, setAccountNumber] = useState<string | undefined>(creditData.account)
   const [currency, setCurrency] = useState<string | undefined>(
     creditData.currency
   )
@@ -59,7 +59,7 @@ const CreateCredit: FC = () => {
           [
             JSON.stringify({
               amount,
-              account,
+              accountNumber,
               currency,
             }),
           ],
@@ -94,13 +94,13 @@ const CreateCredit: FC = () => {
               </label>
               <div className='col-sm-5'>
                 <select
-                  value={account}
-                  onChange={(event) => setAccount(event.target.value)}
+                  value={accountNumber}
+                  onChange={(event) => setAccountNumber(event.target.value)}
                 >
                   <option className='form-control'>---</option>
-                  {userAccountsData.map((account) => {
+                  {userAccountsData.map((userAccount) => {
                     return (
-                      <option className='form-control'>{account.number}</option>
+                      <option className='form-control'>{userAccount.number}</option>
                     )
                   })}
                 </select>
@@ -142,7 +142,7 @@ const CreateCredit: FC = () => {
               type='submit'
               className='btn btn-primary btn-lg px-5 float-right'
             >
-              Open new credit 
+              Open new credit
             </button>
           </div>
         </div>
