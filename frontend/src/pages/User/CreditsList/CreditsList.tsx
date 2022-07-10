@@ -32,7 +32,7 @@ const CreditsList: FC = () => {
   return (
     <>
       <NavLink
-        to={'/credits/new'}
+        to={'/user/credits/new'}
         className='admin-sidebar-link nav-link border my-2 px-2 py-2'
         activeClassName='is-active'
         style={{
@@ -41,7 +41,7 @@ const CreditsList: FC = () => {
           textAlign: 'center',
         }}
       >
-        Add new
+        Open new
       </NavLink>
       <CreditsTable loading={loading} credits={accountCredits} />
     </>

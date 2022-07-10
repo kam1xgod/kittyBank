@@ -76,7 +76,7 @@ const User: FC = () => {
             className='user-sidebar-link nav-link'
             activeClassName='is-active'
           >
-            ---Create new
+            ---Open new
           </NavLink>
           <NavLink
             to={'/user/credits/request-new'}
@@ -124,7 +124,7 @@ const User: FC = () => {
               <ManageTransfer {...props} />
             )}
           />
-          <Route path='/user/credits' component={() => <CreditsList />} />
+          <Route exact path='/user/credits' component={() => <CreditsList />} />
           <Route path='/user/credits/new' component={() => <CreateCredit />} />
         </div>
       </div>

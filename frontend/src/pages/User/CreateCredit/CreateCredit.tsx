@@ -11,6 +11,7 @@ import {
 } from '../../../redux/thunks/transfer-thunks'
 import { Credit, CreditError, Account } from '../../../types/types'
 import { validateAmount } from '../../../utils/input-validators'
+import { currencyList } from '../../../utils/constants/types'
 
 const CreateCredit: FC = () => {
   const dispatch = useDispatch()
@@ -84,7 +85,7 @@ const CreateCredit: FC = () => {
   return (
     <div className='container mt-5 pb-5'>
       {pageLoading}
-      <h4 className='mb-4 text-center'>Create transfer</h4>
+      <h4 className='mb-4 text-center'>Open new credit</h4>
       {error ? (
         <div className='alert alert-danger col-6' role='alert'>
           {error}
@@ -131,20 +132,17 @@ const CreateCredit: FC = () => {
               </div>
             </div>
             <div className='form-group row'>
-              <label className='col-sm-5 col-form-label'>
-                Recipient number:{' '}
-              </label>
+              <label className='col-sm-5 col-form-label'>Currency: </label>
               <div className='col-sm-6'>
-                <input
-                  type='text'
-                  className={
-                    currency ? 'form-control is-invalid' : 'form-control'
-                  }
-                  name='recipientNumber'
+                <select
                   value={currency}
-                  placeholder='Enter recipient number'
                   onChange={(event) => setCurrency(event.target.value)}
-                />
+                >
+                  <option className='form-control'>---</option>
+                  {currencyList.map((currency) => {
+                    return <option className='form-control'>{currency}</option>
+                  })}
+                </select>
               </div>
             </div>
             <button
