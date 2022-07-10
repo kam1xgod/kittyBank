@@ -1,4 +1,4 @@
-# SbtJavaSchool - Kitty Bank.
+# 🐱 SbtJavaSchool - Kitty Bank. 🐈
 
 ## Table of contents
 
