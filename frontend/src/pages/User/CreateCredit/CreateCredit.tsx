@@ -149,7 +149,7 @@ const CreateCredit: FC = () => {
               type='submit'
               className='btn btn-primary btn-lg px-5 float-right'
             >
-              Validate transfer
+              Open new credit 
             </button>
           </div>
         </div>
