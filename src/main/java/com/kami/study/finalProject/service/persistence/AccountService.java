@@ -1,10 +1,8 @@
 package com.kami.study.finalProject.service.persistence;
 
 import com.kami.study.finalProject.model.Account;
-import com.kami.study.finalProject.model.SavingPlan;
 import com.kami.study.finalProject.model.Transfer;
 import com.kami.study.finalProject.model.enums.AccountType;
-import com.kami.study.finalProject.model.enums.Currency;
 import com.kami.study.finalProject.model.enums.PaymentSystem;
 
 import java.util.List;

@@ -1,12 +1,8 @@
 package com.kami.study.finalProject.configuration;
 
-import com.kami.study.finalProject.model.enums.Role;
 import com.kami.study.finalProject.security.JwtConfigurer;
-import com.kami.study.finalProject.security.oauth2.CustomOAuth2UserService;
-import com.kami.study.finalProject.security.oauth2.OAuth2SuccessHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
