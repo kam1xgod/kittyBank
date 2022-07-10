@@ -20,7 +20,7 @@ public class CreditController {
     private final CreditMapper creditMapper;
     private final CreditAccountRequestMapper requestMapper;
     @PostMapping("/new/")
-    public ResponseEntity<CreditResponse> createNewCredit(@Valid @RequestBody CreditRequest creditRequest,
+    public ResponseEntity<CreditResponse> createNewCredit(@Valid @RequestPart("transfer") CreditRequest creditRequest,
                                                                 BindingResult bindingResult) {
         return ResponseEntity.ok(creditMapper.create(creditRequest, bindingResult));
     }

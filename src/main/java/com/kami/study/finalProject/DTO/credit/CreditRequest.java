@@ -11,5 +11,8 @@ public class CreditRequest {
     private Double amount;
 
     @NotBlank(message = "Fill the input field.")
+    private String currency;
+
+    @NotBlank(message = "Fill the input field.")
     private String accountNumber;
 }

@@ -5,13 +5,10 @@ import PageLoader from '../../../component/PageLoader/PageLoader'
 import { AppStateType } from '../../../redux/reducers/root-reducer'
 // TODO: create new thunks for fetching User's credit accounts
 import { fetchUserAccounts } from '../../../redux/thunks/account-thunks'
-import {
-  addTransfer,
-  fetchUserTransfers,
-} from '../../../redux/thunks/transfer-thunks'
 import { Credit, CreditError, Account } from '../../../types/types'
 import { validateAmount } from '../../../utils/input-validators'
 import { currencyList } from '../../../utils/constants/types'
+import { addCredit } from '../../../redux/thunks/credit-thunks'
 
 const CreateCredit: FC = () => {
   const dispatch = useDispatch()
@@ -43,10 +40,6 @@ const CreateCredit: FC = () => {
   const { amountError } = errors
 
   useEffect(() => {
-    dispatch(fetchUserTransfers())
-  }, [])
-
-  useEffect(() => {
     dispatch(fetchUserAccounts())
   }, [])
 
@@ -61,7 +54,7 @@ const CreateCredit: FC = () => {
       setValidateAmountError('')
       const bodyFormData: FormData = new FormData()
       bodyFormData.append(
-        'transfer',
+        'credit',
         new Blob(
           [
             JSON.stringify({
@@ -73,7 +66,7 @@ const CreateCredit: FC = () => {
           { type: 'application/json' }
         )
       )
-      dispatch(addTransfer(bodyFormData, history))
+      dispatch(addCredit(bodyFormData, history))
     }
   }
 
