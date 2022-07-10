@@ -82,10 +82,13 @@ export type Credit = {
     status: string
     total: number
     penalty: number
+    amount: number
+    currency: string
+    account: string
 }
 
 export type CreditError = {
-    // todo: implement.
+    amountError: string
 }
 
 export type CreditRequest = {

@@ -21,7 +21,6 @@ export const addCredit = (data: FormData, history: any) => async (dispatch: Disp
         dispatch(showLoader());
         const response = await RequestService.post("/credit/new", data, true, "multipart/form-data");
         history.push("/account/finalize");
-        // localStorage.removeItem()
         dispatch(creditAddedSuccess(response.data));
     } catch (error) {
         // @ts-ignore

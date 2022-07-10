@@ -17,8 +17,8 @@ export type InitialStateType = {
     credit: Partial<Credit>,
     creditRequest: Partial<CreditRequest>
     creditRequests: Array<CreditRequest>
-    error: Partial<CreditError>,
-    errors: string,
+    errors: Partial<CreditError>,
+    error: string,
     success: string,
     loading: boolean
 };
@@ -28,8 +28,8 @@ const initialState: InitialStateType = {
     credit: {},
     creditRequest: {},
     creditRequests: [],
-    error: {},
-    errors: "",
+    errors: {},
+    error: "",
     success: "",
     loading: false
 };
@@ -44,7 +44,7 @@ const reducer = (state: InitialStateType = initialState, action: CreditActionTyp
             return { ...state, credit: action.payload, loading: false };
 
         case CREDIT_ADDED_FAILURE:
-            return { ...state, error: action.payload, loading: false };
+            return { ...state, errors: action.payload, loading: false };
 
         case CREDIT_ADDED_SUCCESS:
             return { ...state, credit: action.payload, loading: false };
