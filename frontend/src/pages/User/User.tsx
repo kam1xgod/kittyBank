@@ -24,6 +24,7 @@ import CreateTransfer from './CreateTransfer/CreateTransfer'
 import CreateAccount from './CreateAccount/CreateAccount'
 import CreditsList from './CreditsList/CreditsList'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import CreateCredit from './CreateCredit/CreateCredit'
 
 const User: FC = () => {
   const dispatch = useDispatch()
@@ -124,6 +125,7 @@ const User: FC = () => {
             )}
           />
           <Route path='/user/credits' component={() => <CreditsList />} />
+          <Route path='/user/credits/new' component={() => <CreateCredit />} />
         </div>
       </div>
     </div>
