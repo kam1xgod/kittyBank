@@ -37,7 +37,7 @@ Later I will also create repository with all tasks from this JavaSchool.
 
 ### Links
 
-- [CUMyBank](https://sbtfinalproj.herokuapp.com/)
+- [Kitty Bank](https://sbtfinalproj.herokuapp.com/)
 
 ### How to use
 
