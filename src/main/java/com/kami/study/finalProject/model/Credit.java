@@ -67,7 +67,7 @@ public class Credit {
     }
 
     private Double getAmountWithPercentage() {
-        return getAmount() * getAccount().getPercentage();
+        return getAmount() * (getAccount().getPercentage() / 100);
     }
 
     // todo: move methods below to CreditService.
