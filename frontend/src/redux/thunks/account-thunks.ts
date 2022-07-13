@@ -16,6 +16,16 @@ export const fetchUserAccounts = () => async (dispatch: Dispatch) => {
     dispatch(fetchUserAccountsSuccess(response.data));
 };
 
+export const fetchUserCardAccounts = () => async (dispatch: Dispatch) => {
+    const response = await RequestService.get("/user/accounts/card", true);
+    dispatch(fetchUserAccountsSuccess(response.data));
+};
+
+export const fetchUserCreditAccounts = () => async (dispatch: Dispatch) => {
+  const response = await RequestService.get("/user/accounts/credit", true)
+  dispatch(fetchUserAccountsSuccess(response.data));
+}
+
 export const addAccount = (data: FormData, history: any) => async (dispatch: Dispatch) => {
     try {
         dispatch(showLoader());
