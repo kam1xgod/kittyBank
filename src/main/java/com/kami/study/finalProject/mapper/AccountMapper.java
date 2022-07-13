@@ -6,6 +6,7 @@ import com.kami.study.finalProject.exception.InputFieldException;
 import com.kami.study.finalProject.model.Account;
 import com.kami.study.finalProject.model.User;
 import com.kami.study.finalProject.model.enums.AccountType;
+import com.kami.study.finalProject.model.enums.AccountStatus;
 import com.kami.study.finalProject.service.persistence.AccountService;
 import com.kami.study.finalProject.service.persistence.UserService;
 import lombok.RequiredArgsConstructor;
@@ -67,5 +68,13 @@ public class AccountMapper {
 
     public List<AccountResponse> findAllCreditAccounts(String mail) {
         return commonMapper.convertToResponseList(accountService.findByOwnerMailAndType(mail, AccountType.CREDIT), AccountResponse.class);
+    }
+
+    public List<AccountResponse> findAllActiveCreditAccounts(String mail) {
+        return commonMapper.convertToResponseList(accountService.findByOwnerMailAndTypeAndStatus(mail, AccountType.CREDIT, AccountStatus.ACTIVE), AccountResponse.class);
+    }
+
+    public List<AccountResponse> findAllActiveCardAccounts(String mail) {
+        return commonMapper.convertToResponseList(accountService.findByOwnerMailAndTypeAndStatus(mail, AccountType.CARD, AccountStatus.ACTIVE), AccountResponse.class);
     }
 }
