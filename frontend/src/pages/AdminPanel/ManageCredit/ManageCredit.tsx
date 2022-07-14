@@ -31,7 +31,7 @@ const ManageCredit: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
                                 <span className="personal_data_text">{date}</span>
                             </p>
                             <p className="personal_data_item">Days Left:
-                                <span className="personal_data_text">{daysLeft}</span>
+                                <span className="personal_data_text">{daysLeft as number > 0 ? daysLeft : "0"}</span>
                             </p>
                             <p className="personal_data_item">Status:
                                 <span className="personal_data_text">{status}</span>
