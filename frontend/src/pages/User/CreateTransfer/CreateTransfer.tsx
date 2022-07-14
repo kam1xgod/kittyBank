@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import PageLoader from '../../../component/PageLoader/PageLoader'
 import { AppStateType } from '../../../redux/reducers/root-reducer'
-import { fetchUserAccounts } from '../../../redux/thunks/account-thunks'
+import { fetchUserAccounts, fetchUserCardAccounts } from '../../../redux/thunks/account-thunks'
 import {
   addTransfer,
   fetchUserTransfers,
@@ -49,7 +49,7 @@ const CreateTransfer: FC = () => {
   }, [])
 
   useEffect(() => {
-    dispatch(fetchUserAccounts())
+    dispatch(fetchUserCardAccounts())
   }, [])
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>): void => {

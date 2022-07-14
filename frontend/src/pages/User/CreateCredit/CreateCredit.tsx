@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import PageLoader from '../../../component/PageLoader/PageLoader'
 import { AppStateType } from '../../../redux/reducers/root-reducer'
 // TODO: create new thunks for fetching User's credit accounts
-import { fetchUserAccounts } from '../../../redux/thunks/account-thunks'
+import { fetchUserCreditAccounts } from '../../../redux/thunks/account-thunks'
 import { Credit, CreditError, Account } from '../../../types/types'
 import { validateAmount } from '../../../utils/input-validators'
 import { currencyList } from '../../../utils/constants/types'
@@ -40,7 +40,7 @@ const CreateCredit: FC = () => {
   const { amountError } = errors
 
   useEffect(() => {
-    dispatch(fetchUserAccounts())
+    dispatch(fetchUserCreditAccounts())
   }, [])
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>): void => {
