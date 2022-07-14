@@ -27,6 +27,8 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     Optional<Account> findByActivationCode(String code);
 
+    List<Account> findByOwner_MailAndTypeAndStatus(String mail, AccountType type, AccountStatus status);
+
     List<Account> findByOwner_MailAndType(String mail, AccountType type);
 
     List<Account> findByType(AccountType type);
