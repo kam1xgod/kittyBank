@@ -2,6 +2,7 @@ package com.kami.study.finalProject.service.persistence;
 
 import com.kami.study.finalProject.model.Account;
 import com.kami.study.finalProject.model.Transfer;
+import com.kami.study.finalProject.model.enums.AccountStatus;
 import com.kami.study.finalProject.model.enums.AccountType;
 import com.kami.study.finalProject.model.enums.PaymentSystem;
 
@@ -21,6 +22,8 @@ public interface AccountService extends DefaultService<Account> {
     String activateAccount(String code);
 
     List<Account> findByOwnerMailAndType(String mail, AccountType type);
+
+    List<Account> findByOwnerMailAndTypeAndStatus(String mail, AccountType type, AccountStatus status);
 
     Account create(Account account, PaymentSystem paymentSystem);
 

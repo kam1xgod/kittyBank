@@ -54,6 +54,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public List<Account> findByOwnerMailAndTypeAndStatus(String mail, AccountType type, AccountStatus status) {
+        return accountRepository.findByOwner_MailAndTypeAndStatus(mail, type, status);
+    }
+
+    @Override
     public Account findByAccountNumber(String number) {
         return accountRepository.findByNumber(number).orElseThrow(() -> new ApiRequestException("There's no account with such a number", HttpStatus.BAD_REQUEST));
     }
