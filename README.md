@@ -89,7 +89,7 @@ export const WEBSOCKET_URL = "LINK TO YOUR WEBSOCKET WITH HTPP(S)";
 ``` bash
 # in repository's home directory.
 
-mvn clean install package;
+mvn clean install package
 ```
 
 #### With Docker
@@ -99,7 +99,7 @@ mvn clean install package;
 ``` bash
 # in repository's home directory.
 
-docker-compose up;
+docker-compose up
 ```
 
 #### Just jar file
