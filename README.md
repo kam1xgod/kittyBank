@@ -43,20 +43,78 @@ Later I will also create repository with all tasks from this JavaSchool.
 
 #### In general:
 
-- change values in application.properties and /frontend/src/utils/constants/url.ts;
-- check pom.xml and update dependecies if needed;
-- mvn package;
+- change values in `./src/main/resources/application.properties`;
+``` properties 
+# Databse properties:
+
+### may be you would want to change dialect.
+
+### if you're using MariaDB like me:
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+spring.datasource.url=jdbc:mariadb://*hostname*:*port*/*database_name*
+spring.jpa.database-platform=org.hibernate.dialect.MariaDB103Dialect
+
+### or if it's MySQL:
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://*hostname*:*port*/*database_name*
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+
+### same for all:
+spring.datasource.username=*your_username*
+spring.datasource.password=*your_password*
+
+
+# Mailing properties:
+spring.mail.host=smtp.*your_host*
+spring.mail.username=*your_mail_adress*
+spring.mail.password=*your_mails_app_password*
+
+
+# Hostname changing:
+### basically, where your frontend ment to be.
+### for local React JS app: 
+hostname=localhost:3000
+
+
+# JWT secret:
+jwt.secret=*your_random_words*
+```
+- also in `./frontend/src/utils/constants/url.ts`;
+``` TypeScript
+export const API_BASE_URL = "LINK TO YOUR BACKEND WITH HTTP(S)";
+export const WEBSOCKET_URL = "LINK TO YOUR WEBSOCKET WITH HTPP(S)";
+```
+- check `./pom.xml` and update dependecies if needed;
+- Run
+``` bash
+# in repository's home directory.
+
+mvn clean install package;
+```
 
 #### With Docker
 
-- docker-compose up;
+- After all steps above you can simply execute this in your terminal:
+
+``` bash
+# in repository's home directory.
+
+docker-compose up;
+```
 
 #### Just jar file
 
-- java -jar /target/finalProject-0.0.1-SNAPSHOT.jar;
-- cd frontend;
-- yarn install;
-- yarn start;
+- A little bit of walking around, but pretty simple too.
+
+``` bash
+# in repository's home directory.
+
+cd target
+java -jar finalProject-0.0.1-SNAPSHOT.jar
+cd ../frontend
+yarn install
+yarn start
+```
 
 ## My process
 
