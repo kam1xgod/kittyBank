@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -35,8 +36,12 @@ public class CreditAccountRequestServiceImpl implements CreditAccountRequestServ
 
     @Override
     public CreditAccountRequest create(CreditAccountRequest request) {
-        requestRepository.save(request);
-        return request;
+        CreditAccountRequest existedRequest = requestRepository.findByUser_Mail(request.getUser().getMail()); 
+        if (Objects.isNull(existedRequest)) {
+          requestRepository.save(request);
+          return request;
+        }
+        return existedRequest;
     }
 
     @Override
