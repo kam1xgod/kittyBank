@@ -57,7 +57,12 @@ const TransfersTable: FC<PropsType> = ({ loading, credits }) => {
                         : credit.daysLeft}
                     </th>
 
-                    {localStorage.getItem('role') === 'ADMIN' ? (
+                    {credit.status === 'CLOSED' ?
+                    ( <th>
+                      {credit.date}
+                    </th> )
+                    :
+                    localStorage.getItem('role') === 'ADMIN' ? (
                       <th>
                         <Link
                           to={{
@@ -72,7 +77,7 @@ const TransfersTable: FC<PropsType> = ({ loading, credits }) => {
                       <th>
                         <Link
                           to={{
-                            pathname: `/user/credits/${credit.id}`,
+                            pathname: `/user/credits/${credit.id}/info`,
                             state: credit,
                           }}
                         >
