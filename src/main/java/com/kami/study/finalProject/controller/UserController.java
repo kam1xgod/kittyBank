@@ -74,9 +74,10 @@ public class UserController {
         return ResponseEntity.ok(creditMapper.getCreditsByMail(user.getMail()));
     }
 
-    @GetMapping("/accounts/{id}/credits")
-    public ResponseEntity<List<CreditResponse>> getAllAccountCredits(@PathVariable Long id) {
-        return ResponseEntity.ok(creditMapper.getCreditsByAccountId(id));
+    // TODO: add email linking. It shouldn't work only with id, also with user's email.
+    @GetMapping("/credits/{id}")
+    public ResponseEntity<CreditResponse> getAllUserCredits(@AuthenticationPrincipal UserPrincipal user, @PathVariable Long id) {
+        return ResponseEntity.ok(creditMapper.findById(id));
     }
 }
 
