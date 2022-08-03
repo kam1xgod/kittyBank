@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class AccountRequest {
-    @Nullable
+    @NotNull(message = "Fill the input field.")
     private Currency currency;
 
     @NotNull(message = "Fill the input field.")
