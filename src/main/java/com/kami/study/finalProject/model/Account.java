@@ -2,7 +2,6 @@ package com.kami.study.finalProject.model;
 
 import com.kami.study.finalProject.model.enums.AccountStatus;
 import com.kami.study.finalProject.model.enums.AccountType;
-import com.kami.study.finalProject.model.enums.Currency;
 import com.kami.study.finalProject.service.account.AccountNumberGenerator;
 import com.kami.study.finalProject.service.card.CardNumberGenerator;
 import com.kami.study.finalProject.service.exchange.ExchangeService;
@@ -23,96 +22,96 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "account")
 public class Account {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Length(min = 19, max = 20)
-    @Builder.Default
-    private String number = AccountNumberGenerator.generate();
+  @Length(min = 19, max = 20)
+  @Builder.Default
+  private String number = AccountNumberGenerator.generate();
 
-    @Builder.Default
-    private Date lastTransactionDate = Date.valueOf(LocalDate.now());
+  @Builder.Default
+  private Date lastTransactionDate = Date.valueOf(LocalDate.now());
 
-    @Builder.Default
-    private Double balance = 0.0;
+  @Builder.Default
+  private Double balance = 0.0;
 
-    @Enumerated(EnumType.STRING)
-    @Builder.Default
-    private AccountStatus status = AccountStatus.WAITING;
+  @Enumerated(EnumType.STRING)
+  @Builder.Default
+  private AccountStatus status = AccountStatus.WAITING;
 
-    @Enumerated(EnumType.STRING)
-    @Builder.Default
-    private AccountType type = AccountType.CARD;
+  @Enumerated(EnumType.STRING)
+  @Builder.Default
+  private AccountType type = AccountType.CARD;
 
-    @Enumerated(EnumType.STRING)
-    @Builder.Default
-    private Currency currency = Currency.RUB;
+  @ManyToOne
+  @JoinColumn(name = "currency")
+  private Currency currency;
 
-    @Nullable
-    private Double creditLimit;
+  @Nullable
+  private Double creditLimit;
 
-    @OneToOne
-    @Nullable
-    private Card card;
+  @OneToOne
+  @Nullable
+  private Card card;
 
-    @ManyToOne
-    @JoinColumn(name = "owner")
-    private User owner;
+  @ManyToOne
+  @JoinColumn(name = "owner")
+  private User owner;
 
-    @Nullable
-    @Builder.Default
-    private Double percentage = null;
+  @Nullable
+  @Builder.Default
+  private Double percentage = null;
 
-    @Builder.Default
-    private boolean canWithdraw = false;
+  @Builder.Default
+  private boolean canWithdraw = false;
 
-    @Builder.Default
-    private boolean canDeposit = false;
+  @Builder.Default
+  private boolean canDeposit = false;
 
-    @Builder.Default
-    private boolean closable = false;
+  @Builder.Default
+  private boolean closable = false;
 
-    @Builder.Default
-    private boolean capitalized = false;
+  @Builder.Default
+  private boolean capitalized = false;
 
-    @Nullable
-    @Builder.Default
-    private Double min = 100_000.0;
+  @Nullable
+  @Builder.Default
+  private Double min = 100_000.0;
 
-    @Nullable
-    @Builder.Default
-    private Double max = 1_000_000.0;
+  @Nullable
+  @Builder.Default
+  private Double max = 1_000_000.0;
 
-    @Nullable
-    @Builder.Default
-    private Double minMonth = 0.0;
+  @Nullable
+  @Builder.Default
+  private Double minMonth = 0.0;
 
-    @Nullable
-    @Builder.Default
-    private Long years = 0L;
+  @Nullable
+  @Builder.Default
+  private Long years = 0L;
 
-    @Builder.Default
-    private Date dateOpened = Date.valueOf(LocalDate.now());
+  @Builder.Default
+  private Date dateOpened = Date.valueOf(LocalDate.now());
 
-    @Nullable
-    private String activationCode;
+  @Nullable
+  private String activationCode;
 
-    public void addMoney(Double amount) {
-        this.balance += amount;
-        setLastTransactionDate(Date.valueOf(LocalDate.now()));
+  public void addMoney(Double amount) {
+    this.balance += amount;
+    setLastTransactionDate(Date.valueOf(LocalDate.now()));
+  }
+
+  public void withdrawMoney(Double amount) {
+    this.balance -= amount;
+    setLastTransactionDate(Date.valueOf(LocalDate.now()));
+  }
+
+  public double getExchangedBalance() {
+    try {
+      return getBalance() * ExchangeService.getRate(getCurrency());
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
-
-    public void withdrawMoney(Double amount) {
-        this.balance -= amount;
-        setLastTransactionDate(Date.valueOf(LocalDate.now()));
-    }
-
-    public double getExchangedBalance() {
-        try {
-            return getBalance() * ExchangeService.getRate(getCurrency());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+  }
 }

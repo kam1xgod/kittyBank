@@ -1,9 +1,9 @@
 package com.kami.study.finalProject.DTO.account;
 
 import com.kami.study.finalProject.DTO.card.CardResponse;
+import com.kami.study.finalProject.model.Currency;
 import com.kami.study.finalProject.model.enums.AccountStatus;
 import com.kami.study.finalProject.model.enums.AccountType;
-import com.kami.study.finalProject.model.enums.Currency;
 import lombok.Data;
 
 import java.math.BigDecimal;

@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -15,21 +14,17 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(setterPrefix = "with")
 @Getter
 @Setter
 @Entity
-@Table(name = "credit_requests")
-public class CreditAccountRequest {
+@Table(name = "currency")
+public class Currency {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Double desiredLimit;
-
-  @ManyToOne
-  private Currency currency;
-
-  @ManyToOne
-  private User user;
+  private String name;
+  private String symbol;
+  private String accountNumbers;
 }

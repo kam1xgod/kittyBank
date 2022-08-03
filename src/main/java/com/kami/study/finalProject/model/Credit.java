@@ -1,7 +1,6 @@
 package com.kami.study.finalProject.model;
 
 import com.kami.study.finalProject.model.enums.CreditStatus;
-import com.kami.study.finalProject.model.enums.Currency;
 import com.kami.study.finalProject.service.exchange.ExchangeService;
 import lombok.*;
 
@@ -74,11 +73,10 @@ public class Credit {
 
     public void addPenalty() {
         setTotal(getTotal() + getAmount() * getPenalty());
-        payOrCloseCredit();
     }
 
     public void setCommission() {
-        if (account.getCurrency() != Currency.RUB) {
+        if (account.getCurrency().getName() != "RUB") {
             setCommission(0.1); // todo: some const with default commission;
 
             try {
@@ -86,23 +84,6 @@ public class Credit {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }
-    }
-
-    // todo: idk if it's ok to keep this methods here. will stick with it for now.
-    private void payOrCloseCredit() {
-        double exchanged = getAccount().getExchangedBalance();
-        if (exchanged > getTotal()) {
-            exchanged = getTotal();
-        }
-        pay(exchanged);
-    }
-
-    private void pay(Double sum) {
-        setTotal(getTotal() - sum);
-        getAccount().withdrawMoney(sum);
-        if (getTotal() == 0.0) {
-            setStatus(CreditStatus.CLOSED);
         }
     }
 

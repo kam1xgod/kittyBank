@@ -1,7 +1,7 @@
 package com.kami.study.finalProject.DTO.account;
 
+import com.kami.study.finalProject.model.Currency;
 import com.kami.study.finalProject.model.enums.AccountType;
-import com.kami.study.finalProject.model.enums.Currency;
 import com.kami.study.finalProject.model.enums.PaymentSystem;
 import lombok.Data;
 import org.springframework.lang.Nullable;

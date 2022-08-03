@@ -1,7 +1,8 @@
 package com.kami.study.finalProject.service.exchange;
 
 import com.google.gson.JsonParser;
-import com.kami.study.finalProject.model.enums.Currency;
+import com.kami.study.finalProject.model.Currency;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,6 @@ public class ExchangeService {
     }
 
     private static String prepareURL(Currency currency) {
-        return String.format("https://v6.exchangerate-api.com/v6/abfa2886f1b77c08e68f39e2/pair/%s/RUB", currency.name());
+        return String.format("https://v6.exchangerate-api.com/v6/abfa2886f1b77c08e68f39e2/pair/%s/RUB", currency.getName());
     }
 }
