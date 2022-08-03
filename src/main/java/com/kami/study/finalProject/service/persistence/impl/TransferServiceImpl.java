@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -122,7 +123,8 @@ public class TransferServiceImpl implements TransferService {
     List<Transfer> concatList = new ArrayList<>();
     concatList.addAll(transferRepository.getBySender_Owner_Mail(mail));
     concatList.addAll(transferRepository.getByRecipient_Owner_Mail(mail));
-    return concatList;
+    List<Transfer> withoutDuplicates = new ArrayList<>(new HashSet<>(concatList));
+    return withoutDuplicates;
   }
 
   @Override
