@@ -67,6 +67,11 @@ public class CreditMapper {
         return commonMapper.convertToResponseList(creditService.findByAccountId(id), CreditResponse.class);
     }
 
+  public List<CreditResponse> payCredit(String mail, Long id) {
+      propertyDaysLeft();
+    return commonMapper.convertToResponseList(creditService.payOrClose(mail, id), CreditResponse.class);
+  }
+
     private void propertyDaysLeft() {
         TypeMap<Credit, CreditResponse> propertyMap = commonMapper.createPropertyMapper(Credit.class, CreditResponse.class);
         propertyMap.addMappings(mapper -> {
