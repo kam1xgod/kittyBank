@@ -13,4 +13,6 @@ public interface CreditService extends DefaultService<Credit> {
     List<Credit> findByUserMail(String mail);
 
     List<Credit> findByCardNumber(String number);
+
+    List<Credit> payOrClose(String mail, Long id);
 }
