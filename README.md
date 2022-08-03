@@ -17,11 +17,11 @@
 
 ## Overview
 
-This application is some kind of online banking.
+This application is some kind of online banking. There's an issue about branching since I did it too late.
 
 ### Info
 
-So, from february I was able to learn more 'bout Java in SbtSchool - program from Russian bank.
+So, from february I was able to learn more 'bout Java in [SbtSchool](https://github.com/kam1xgod/sbtJavaSchool_2022) - program from Russian bank.
 And this is - the graduation work. You can create become a user with your email, create accounts, 
 activate them with link sent to email and do basic bank things.
 
