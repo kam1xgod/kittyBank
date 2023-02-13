@@ -22,4 +22,6 @@ public class SavingPlanRequest {
     private Long min;
     @NotNull
     private Long max;
+    @NotNull
+    private String imageUrl;
 }

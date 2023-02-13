@@ -1,11 +1,9 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState, MouseEvent } from 'react'
 import { useDispatch } from 'react-redux'
 import {
   NavLink,
-  Redirect,
   Route,
   RouteComponentProps,
-  Router,
 } from 'react-router-dom'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -25,6 +23,8 @@ import CreateAccount from './CreateAccount/CreateAccount'
 import CreditsList from './CreditsList/CreditsList'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import CreateCredit from './CreateCredit/CreateCredit'
+import ManageCredit from './ManageCredit/ManageCredit'
+import { Button, ButtonGroup, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
 
 const User: FC = () => {
   const dispatch = useDispatch()
@@ -33,13 +33,22 @@ const User: FC = () => {
     dispatch(fetchUserInfo())
   }, [dispatch])
 
+  // const [firstBtnVar, setFirstBtnVar] = useState("primary")
+  // const [secondBtnVar, setSecondBtnVar] = useState("secondary")
+  // const [thirdBtnVar, setThirdBtnVar] = useState("secondary")
+  
+  // const onClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
+  //     e.preventDefault()
+  //     console.log(e.currentTarget.value)
+  //   }
+
   return (
     <div className='user-container container'>
       <div className='row mt-5'>
         <div className='col-md-2'>
           <h4>
-            <FontAwesomeIcon className='mr-2' icon={faUser as IconProp} />
             <NavLink to={'/user'} className='user-sidebar-link'>
+            <FontAwesomeIcon className='mr-2' icon={faUser as IconProp} />
               My Account
             </NavLink>
           </h4>
@@ -58,25 +67,11 @@ const User: FC = () => {
             Transfers
           </NavLink>
           <NavLink
-            to={'/user/transfers/new'}
-            className='user-sidebar-link nav-link'
-            activeClassName='is-active'
-          >
-            ---Create new
-          </NavLink>
-          <NavLink
             to={'/user/credits'}
             className='user-sidebar-link nav-link'
             activeClassName='is-active'
           >
             Credits
-          </NavLink>
-          <NavLink
-            to={'/user/credits/request-new'}
-            className='user-sidebar-link nav-link'
-            activeClassName='is-active'
-          >
-            ---Request account 
           </NavLink>
           <NavLink
             to={'/user/account/new'}
@@ -101,24 +96,20 @@ const User: FC = () => {
           <Route path='/user/accounts' component={() => <AccountsList />} />
           <Route path='/user/account/new' component={() => <CreateAccount />} />
           <Route
-            path='/user/accounts/:id'
+            path='/user/accounts/:id/info'
             component={(props: RouteComponentProps<{ id: string }>) => (
               <ManageAccount {...props} />
             )}
           />
           <Route path='/user/transfers' component={() => <TransfersList />} />
           <Route
-            path='/user/transfers/new'
-            component={() => <CreateTransfer />}
-          />
-          <Route
-            path='/user/transfers/:id'
+            path='/user/transfers/:id/info'
             component={(props: RouteComponentProps<{ id: string }>) => (
               <ManageTransfer {...props} />
             )}
           />
           <Route path='/user/credits' component={() => <CreditsList />} />
-          <Route exact path='/user/credits/new' component={() => <CreateCredit />} />
+          <Route exact path='/user/credits/:id/info' component={(props: RouteComponentProps<{ id: string}>) => <ManageCredit {...props}/>} />
         </div>
       </div>
     </div>

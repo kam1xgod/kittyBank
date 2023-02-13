@@ -1,6 +1,6 @@
 package com.kami.study.finalProject.security;
 
-import com.kami.study.finalProject.model.User;
+import com.kami.study.finalProject.model.Users;
 import com.kami.study.finalProject.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.LockedException;
@@ -17,7 +17,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
-        User user = repository.findByMail(mail)
+        Users user = repository.findByMail(mail)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User with {%s} email not found", mail)));
         if (user.getActivationCode() != null) {
             throw new LockedException("Email not activated.");

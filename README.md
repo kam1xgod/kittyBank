@@ -187,3 +187,7 @@ yarn start
 - Telegram - [kam1xgod](https://t.me/kamixgod)
 - Mail - [kamixtrash@gmail.com](mailto:kamixtrash@gmail.com)
 
+
+## Last changes
+
+- Migrated to PostgreSQL; changed user table name to users.

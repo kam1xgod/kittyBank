@@ -1,17 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, MouseEvent } from 'react'
 import { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import CreditsTable from '../../../component/CreditsTable/CreditsTable'
 import { AppStateType } from '../../../redux/reducers/root-reducer'
 import { fetchUserInfo } from '../../../redux/thunks/user-thunks'
-import {
-  addCreditRequest,
-  fetchUserCredits,
-} from '../../../redux/thunks/credit-thunks'
+import { fetchUserCredits } from '../../../redux/thunks/credit-thunks'
 import { Credit, CreditRequest, User } from '../../../types/types'
+import { Button } from '../../../component/Input/Button'
+import CreateCredit from '../CreateCredit/CreateCredit'
+import { ToggleButton } from '../../../component/Input/ToggleButton'
 
 const CreditsList: FC = () => {
+  const [isCreate, setIsCreate] = useState(false)
+
+  const clickHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+
+    setIsCreate(!isCreate)
+  }
+
   const dispatch = useDispatch()
   const accountCredits: Array<Credit> = useSelector(
     (state: AppStateType) => state.credit.credits
@@ -26,25 +34,20 @@ const CreditsList: FC = () => {
   useEffect(() => {
     dispatch(fetchUserCredits())
     dispatch(fetchUserInfo())
-    dispatch(addCreditRequest(localStorage.getItem('mail') as string))
   }, [])
 
   return (
-    <>
-      <NavLink
-        to={'/user/credits/new'}
-        className='admin-sidebar-link nav-link border my-2 px-2 py-2'
-        activeClassName='is-active'
-        style={{
-          backgroundColor: '#43506C',
-          color: '#E9E9EB',
-          textAlign: 'center',
-        }}
-      >
-        Open new
-      </NavLink>
-      <CreditsTable loading={loading} credits={accountCredits} />
-    </>
+    <div>
+      <ToggleButton>
+        <Button className={isCreate ? 'btn-secondary' : 'btn-primary'} onClick={clickHandler}>View all</Button>
+        <Button className={!isCreate ? 'btn-secondary' : 'btn-primary'} onClick={clickHandler}>Open new</Button>
+      </ToggleButton>
+      {isCreate ? (
+        <CreateCredit />
+      ) : (
+        <CreditsTable loading={loading} credits={accountCredits} />
+      )}
+    </div>
   )
 }
 

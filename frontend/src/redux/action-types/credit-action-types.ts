@@ -11,7 +11,7 @@ export const CREDIT_REQUEST_DELETED_SUCCESS = "CREDIT_REQUEST_DELETED_SUCCESS";
 
 export type FetchCreditSuccessActionType = { type: typeof FETCH_CREDIT_SUCCESS, payload: Credit };
 export type CreditAddedSuccessActionType = { type: typeof CREDIT_ADDED_SUCCESS, payload: Credit };
-export type CreditAddedFailureActionType = { type: typeof CREDIT_ADDED_FAILURE, payload: CreditError };
+export type CreditAddedFailureActionType = { type: typeof CREDIT_ADDED_FAILURE, payload: string };
 export type FetchUserCreditsActionType = { type: typeof FETCH_USER_CREDITS_SUCCESS, payload: Array<Credit> };
 export type CreditRequestAddedSuccessActionType = { type: typeof CREDIT_REQUEST_ADDED_SUCCESS, payload: CreditRequest };
 export type FetchCreditRequestsSuccessActionType = { type: typeof FETCH_CREDIT_REQUESTS_SUCCESS, payload: Array<CreditRequest>};

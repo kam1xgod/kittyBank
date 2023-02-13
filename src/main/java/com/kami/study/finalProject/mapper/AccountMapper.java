@@ -4,10 +4,12 @@ import com.kami.study.finalProject.DTO.account.AccountRequest;
 import com.kami.study.finalProject.DTO.account.AccountResponse;
 import com.kami.study.finalProject.exception.InputFieldException;
 import com.kami.study.finalProject.model.Account;
-import com.kami.study.finalProject.model.User;
+import com.kami.study.finalProject.model.Currency;
+import com.kami.study.finalProject.model.Users;
 import com.kami.study.finalProject.model.enums.AccountType;
 import com.kami.study.finalProject.model.enums.AccountStatus;
 import com.kami.study.finalProject.service.persistence.AccountService;
+import com.kami.study.finalProject.service.persistence.CurrencyService;
 import com.kami.study.finalProject.service.persistence.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.AbstractConverter;
@@ -24,6 +26,7 @@ public class AccountMapper {
     private final CommonMapper commonMapper;
     private final AccountService accountService;
     private final UserService userService;
+    private final CurrencyService currencyService;
 
     public List<AccountResponse> findAll() {
         return commonMapper.convertToResponseList(accountService.findAll(), AccountResponse.class);
@@ -34,16 +37,24 @@ public class AccountMapper {
             throw new InputFieldException(bindingResult);
         }
 
-        Converter<String, User> getUserByMail = new AbstractConverter<String, User>() {
+        Converter<String, Users> getUserByMail = new AbstractConverter<String, Users>() {
             @Override
-            protected User convert(String mail) {
+            protected Users convert(String mail) {
                 return userService.findUserByEmail(mail);
+            }
+        };
+
+        Converter<String, Currency> getCurrencyByName = new AbstractConverter<String, Currency>() {
+            @Override
+            protected Currency convert(String name) {
+                return currencyService.findByName(name);
             }
         };
 
         TypeMap<AccountRequest, Account> propertyMap = commonMapper.createPropertyMapper(AccountRequest.class, Account.class);
         propertyMap.addMappings(mapper -> {
             mapper.using(getUserByMail).map(AccountRequest::getMail, Account::setOwner);
+            mapper.using(getCurrencyByName).map(AccountRequest::getCurrencyName, Account::setCurrency);
         });
 
         Account account = commonMapper.convert(accountRequest, Account.class);
@@ -77,4 +88,8 @@ public class AccountMapper {
     public List<AccountResponse> findAllActiveCardAccounts(String mail) {
         return commonMapper.convertToResponseList(accountService.findByOwnerMailAndTypeAndStatus(mail, AccountType.CARD, AccountStatus.ACTIVE), AccountResponse.class);
     }
+
+  public String delete(Long userId, Long accountId) {
+      return accountService.delete(userId, accountId);
+  }
 }

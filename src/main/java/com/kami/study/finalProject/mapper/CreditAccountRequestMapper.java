@@ -5,7 +5,7 @@ import com.kami.study.finalProject.DTO.creditAccountRequest.CreditAccountRequest
 import com.kami.study.finalProject.exception.InputFieldException;
 import com.kami.study.finalProject.model.Account;
 import com.kami.study.finalProject.model.CreditAccountRequest;
-import com.kami.study.finalProject.model.User;
+import com.kami.study.finalProject.model.Users;
 import com.kami.study.finalProject.service.persistence.AccountService;
 import com.kami.study.finalProject.service.persistence.CreditAccountRequestService;
 import com.kami.study.finalProject.service.persistence.UserService;
@@ -43,9 +43,9 @@ public class CreditAccountRequestMapper {
       throw new InputFieldException(bindingResult);
     }
 
-    Converter<String, User> getUserByMail = new AbstractConverter<String, User>() {
+    Converter<String, Users> getUserByMail = new AbstractConverter<String, Users>() {
       @Override
-      protected User convert(String mail) {
+      protected Users convert(String mail) {
         return userService.findUserByEmail(mail);
       }
     };

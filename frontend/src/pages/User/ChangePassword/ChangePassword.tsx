@@ -8,6 +8,7 @@ import {AppStateType} from "../../../redux/reducers/root-reducer";
 import {resetForm, updateUserPassword} from "../../../redux/thunks/user-thunks";
 import "./ChangePassword.css";
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { Button } from '../../../component/Input/Button';
 
 const ChangePassword: FC = () => {
     const dispatch = useDispatch();
@@ -61,9 +62,9 @@ const ChangePassword: FC = () => {
                         <div className="invalid-feedback">{password2Error}</div>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-dark">
+                <Button type='submit'>
                     <FontAwesomeIcon className="mr-3" icon={faUndo as IconProp}/>Change
-                </button>
+                </Button>
             </form>
         </div>
     );

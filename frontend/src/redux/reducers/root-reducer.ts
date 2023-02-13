@@ -7,11 +7,13 @@ import userReducer from "./user-reducer";
 import transferReducer from "./transfer-reducer";
 import planReducer from "./plans-reducer"
 import creditReducer from "./credit-reducer";
+import currencyReducer from './currency-reducer'
 
 const rootReducer = combineReducers({
     account: accountReducer,
     transfer: transferReducer,
     credit: creditReducer,
+    currency: currencyReducer,
     savingPlan: planReducer,
     auth: authReducer,
     admin: adminReducer,

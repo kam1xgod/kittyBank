@@ -24,7 +24,7 @@ export const addCredit = (data: FormData, history: any) => async (dispatch: Disp
         dispatch(creditAddedSuccess(response.data));
     } catch (error) {
         // @ts-ignore
-        dispatch(creditAddedFailure(error.response?.data));
+        dispatch(creditAddedFailure(error.response.data));
     }
 };
 
@@ -34,9 +34,9 @@ export const fetchCreditInfo = (id: string) => async (dispatch: Dispatch) => {
     dispatch(fetchCreditSuccess(response.data));
 };
 
-export const addCreditRequest = (mail: string) =>async (dispatch:Dispatch) => {
+export const addCreditRequest = (data: FormData) =>async (dispatch:Dispatch) => {
     dispatch(showLoader());
-    const response = await RequestService.get("/credit/request/" + mail, true);
+    const response = await RequestService.post("/credit/request", data, true, "multipart/form-data");
     dispatch(creditRequestAddedSuccess(response.data));
 }
 

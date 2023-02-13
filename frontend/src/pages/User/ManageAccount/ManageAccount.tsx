@@ -38,7 +38,7 @@ const ManageAccount: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
                                     <span className="personal_data_text">{balance}</span>
                                 </p>
                                 <p className="personal_data_item">Currency:
-                                    <span className="personal_data_text">{currency}</span>
+                                    <span className="personal_data_text">{currency?.name}</span>
                                 </p>
                                 <p className="personal_data_item">Last transaction date:
                                     <span className="personal_data_text">{lastTransactionDate}</span>
@@ -107,12 +107,12 @@ const ManageAccount: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
                                                     </th>
                                                     <th>{transfer.dateTime.replace('T', ' ')}</th>
                                                     {transfer.recipientNumber === { number }.number ?
-                                                        <th>+ {transfer.amount} {currency}</th> :
-                                                        <th>- {transfer.amount} {currency}</th>
+                                                        <th>+ {transfer.amount} {currency?.name}</th> :
+                                                        <th>- {transfer.amount} {currency?.name}</th>
                                                     }
                                                     <th>
                                                         <Link to={{
-                                                            pathname: `/user/transfers/${transfer.id}`,
+                                                            pathname: `/user/transfers/${transfer.id}/info`,
                                                             state: transfer
                                                         }}>
                                                             Show more

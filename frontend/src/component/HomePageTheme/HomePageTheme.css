@@ -1,0 +1,10 @@
+.home__cards {
+  display: flex;
+  justify-content: between;
+  margin: 30px 10%;
+  align-items: center;
+}
+
+img {
+  width: 25%;
+}

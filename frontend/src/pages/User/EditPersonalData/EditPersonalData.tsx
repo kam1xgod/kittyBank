@@ -8,6 +8,7 @@ import {AppStateType} from "../../../redux/reducers/root-reducer";
 import {resetForm, updateUserInfo} from '../../../redux/thunks/user-thunks';
 import "./EditPersonalData.css";
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { Button } from '../../../component/Input/Button';
 
 const EditPersonalData: FC = () => {
     const dispatch = useDispatch();
@@ -59,9 +60,9 @@ const EditPersonalData: FC = () => {
                         <div className="invalid-feedback">{lastNameError}</div>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-dark">
+                <Button type='submit'>
                     <FontAwesomeIcon className="mr-2" icon={faCheck as IconProp}/>Save
-                </button>
+                </Button>
             </form>
         </>
     );

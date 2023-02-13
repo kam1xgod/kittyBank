@@ -44,7 +44,7 @@ const reducer = (state: InitialStateType = initialState, action: CreditActionTyp
             return { ...state, credit: action.payload, loading: false };
 
         case CREDIT_ADDED_FAILURE:
-            return { ...state, errors: action.payload, loading: false };
+            return { ...state, error: action.payload, loading: false };
 
         case CREDIT_ADDED_SUCCESS:
             return { ...state, credit: action.payload, loading: false };

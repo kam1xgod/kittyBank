@@ -1,6 +1,9 @@
-import React, { FC, FormEvent, useEffect, useState } from 'react'
+import React, { FC, FormEvent, useEffect, useState, MouseEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { TransferBetween } from '../../../component/CreateTransfer/TransferBetween'
+import { TransferToAccount } from '../../../component/CreateTransfer/TransferToAccount'
+import { TransferToClient } from '../../../component/CreateTransfer/TransferToClient'
 import PageLoader from '../../../component/PageLoader/PageLoader'
 import { AppStateType } from '../../../redux/reducers/root-reducer'
 import { fetchUserAccounts, fetchUserCardAccounts } from '../../../redux/thunks/account-thunks'
@@ -10,6 +13,8 @@ import {
 } from '../../../redux/thunks/transfer-thunks'
 import { Transfer, TransferError, Account } from '../../../types/types'
 import { validateAmount } from '../../../utils/input-validators'
+import { ToggleButton } from '../../../component/Input/ToggleButton'
+import { Button } from '../../../component/Input/Button'
 
 const CreateTransfer: FC = () => {
   const dispatch = useDispatch()
@@ -19,9 +24,6 @@ const CreateTransfer: FC = () => {
   )
   const transferData: Partial<Transfer> = useSelector(
     (state: AppStateType) => state.transfer.transfer
-  )
-  const transfers: Array<Transfer> = useSelector(
-    (state: AppStateType) => state.transfer.transfers
   )
   const userAccountsData: Array<Account> = useSelector(
     (state: AppStateType) => state.account.accounts
@@ -40,9 +42,8 @@ const CreateTransfer: FC = () => {
   const [senderNumber, setSenderNumber] = useState<string | undefined>(
     transferData.senderNumber
   )
-  const [validateAmountError, setValidateAmountError] = useState<string>('')
 
-  const { recipientNumberError, amountError } = errors
+  const [type, setType] = useState('cards')
 
   useEffect(() => {
     dispatch(fetchUserTransfers())
@@ -52,15 +53,17 @@ const CreateTransfer: FC = () => {
     dispatch(fetchUserCardAccounts())
   }, [])
 
+  const onClickHandler = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+
+    setType(event.currentTarget.value)
+  }
+
   const onFormSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
 
     const validateAmountError: string = validateAmount(amount)
 
-    if (validateAmountError) {
-      setValidateAmountError(validateAmountError)
-    } else {
-      setValidateAmountError('')
       const bodyFormData: FormData = new FormData()
       bodyFormData.append(
         'transfer',
@@ -76,7 +79,6 @@ const CreateTransfer: FC = () => {
         )
       )
       dispatch(addTransfer(bodyFormData, history))
-    }
   }
 
   let pageLoading
@@ -88,80 +90,19 @@ const CreateTransfer: FC = () => {
     <div className='container mt-5 pb-5'>
       {pageLoading}
       <h4 className='mb-4 text-center'>Create transfer</h4>
+      <ToggleButton>
+        <Button className={type === "cards" ? "btn-primary" : "btn-secondary"} value="cards" onClick={onClickHandler}>Between my cards</Button>
+        <Button className={type === "client" ? "btn-primary" : "btn-secondary"} value="client" onClick={onClickHandler}>To another client</Button>
+        <Button className={type === "account" ? "btn-primary" : "btn-secondary"} value="account" onClick={onClickHandler}>By account number</Button>
+      </ToggleButton>
       {error ? (
         <div className='alert alert-danger col-6' role='alert'>
           {error}
         </div>
       ) : null}
-      <br />
-      <form onSubmit={onFormSubmit}>
-        <div className='row'>
-          <div className='col-lg-6'>
-            <div className='form-group row'>
-              <label className='col-sm-5 col-form-label'>
-                Choose your account:{' '}
-              </label>
-              <div className='col-sm-5'>
-                <select
-                  value={senderNumber}
-                  onChange={(event) => setSenderNumber(event.target.value)}
-                >
-                  <option className='form-control'>---</option>
-                  {userAccountsData.map((account) => {
-                    return (
-                      <option className='form-control'>{account.number}</option>
-                    )
-                  })}
-                </select>
-              </div>
-            </div>
-            <div className='form-group row'>
-              <label className='col-sm-5 col-form-label'>Amount: </label>
-              <div className='col-sm-6'>
-                <input
-                  type='text'
-                  className={
-                    amountError ? 'form-control is-invalid' : 'form-control'
-                  }
-                  name='amount'
-                  value={amount}
-                  placeholder='Enter amount'
-                  onChange={(event) =>
-                    setAmount(parseFloat(event.target.value))
-                  }
-                />
-                <div className='invalid-feedback'>{amountError}</div>
-              </div>
-            </div>
-            <div className='form-group row'>
-              <label className='col-sm-5 col-form-label'>
-                Recipient number:{' '}
-              </label>
-              <div className='col-sm-6'>
-                <input
-                  type='text'
-                  className={
-                    recipientNumberError
-                      ? 'form-control is-invalid'
-                      : 'form-control'
-                  }
-                  name='recipientNumber'
-                  value={recipientNumber}
-                  placeholder='Enter recipient number'
-                  onChange={(event) => setRecipientNumber(event.target.value)}
-                />
-                <div className='invalid-feedback'>{recipientNumberError}</div>
-              </div>
-            </div>
-            <button
-              type='submit'
-              className='btn btn-primary btn-lg px-5 float-right'
-            >
-              Validate transfer
-            </button>
-          </div>
-        </div>
-      </form>
+      {type === "account" && <TransferToAccount transferData={transferData} loading={loading} error={error}/>}
+      {type === "cards" && <TransferBetween transferData={transferData} loading={loading} error={error}/>}
+      {type === "client" && <TransferToClient transferData={transferData} loading={loading} error={error}/>}
     </div>
   )
 }

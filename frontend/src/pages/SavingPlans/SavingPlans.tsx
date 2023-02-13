@@ -48,6 +48,7 @@ const SavingPlans: FC = () => {
                 return (
                     <div className="col-md-2 border rounded my-3 mx-3 py-3 px-3">
                         <h4>{savingPlan.id}</h4>
+                        {/*<img className="d-block w-100" src={savingPlan.imageUrl} alt="saving plan image"></img>*/}
                         <p>Deposit: {savingPlan.canDeposit ? "yes" : "no"}</p>
                         <p>Withdraw: {savingPlan.canWithdraw ? "yes" : "no"}</p>
                         <p>Capitalized: {savingPlan.capitalized ? "yes" : "no"}</p>

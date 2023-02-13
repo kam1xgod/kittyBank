@@ -1,0 +1,28 @@
+button {
+  text-align: center;
+  color: #E9E9EB;
+  background-color: #43506C;
+  border-radius: 15px;  
+  margin: 0;
+  padding: 6px;
+  border: none;
+  outline: none;
+}
+
+button:focus, .btn-primary:focus, .btn-secondary:focus {
+  outline: none !important;
+  border: none;
+  box-shadow: none;
+}
+
+button.crimson {
+  background-color: crimson;
+}
+
+.btn-primary {
+background-color: #007bff;
+}
+
+.btn-secondary {
+  background-color: #43506C;
+}

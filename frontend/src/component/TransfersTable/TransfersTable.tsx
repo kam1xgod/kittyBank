@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC} from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 
@@ -42,7 +42,7 @@ const TransfersTable: FC<PropsType> = ({ loading, transfers }) => {
                                         {localStorage.getItem('role') === 'ADMIN' ?
                                             <th>
                                                 <Link to={{
-                                                    pathname: `/admin/transfers/${transfer.id}`,
+                                                    pathname: `/admin/transfers/${transfer.id}/info`,
                                                     state: transfer
                                                 }}>
                                                     Show more
@@ -50,7 +50,7 @@ const TransfersTable: FC<PropsType> = ({ loading, transfers }) => {
                                             </th> :
                                             <th>
                                                 <Link to={{
-                                                    pathname: `/user/transfers/${transfer.id}`,
+                                                    pathname: `/user/transfers/${transfer.id}/info`,
                                                     state: transfer
 
                                                 }}>

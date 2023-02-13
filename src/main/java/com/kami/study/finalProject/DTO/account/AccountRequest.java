@@ -1,6 +1,5 @@
 package com.kami.study.finalProject.DTO.account;
 
-import com.kami.study.finalProject.model.Currency;
 import com.kami.study.finalProject.model.enums.AccountType;
 import com.kami.study.finalProject.model.enums.PaymentSystem;
 import lombok.Data;
@@ -11,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class AccountRequest {
     @NotNull(message = "Fill the input field.")
-    private Currency currency;
+    private String currencyName;
 
     @NotNull(message = "Fill the input field.")
     private AccountType type;

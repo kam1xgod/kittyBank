@@ -10,8 +10,12 @@ import {
     FetchUserAccountsActionType,
     ActivateAccountSuccessActionType,
     ActivateAccountFailureActionType,
+  AccountDeletedSuccessActionType,
+  AccountDeletedFailureActionType,
     ACTIVATE_ACCOUNT_SUCCESS,
-    ACTIVATE_ACCOUNT_FAILURE
+    ACTIVATE_ACCOUNT_FAILURE,
+  ACCOUNT_DELETED_SUCCESS,
+  ACCOUNT_DELETED_FAILURE
 } from "../action-types/account-action-types";
 
 export const fetchAccountSuccess = (account: Account): FetchAccountSuccessActionType => ({
@@ -24,7 +28,7 @@ export const accountAddedSuccess = (account: Account): AccountAddedSuccessAction
     payload: account
 });
 
-export const accountAddedFailure = (error: AccountError): AccountAddedFailureActionType => ({
+export const accountAddedFailure = (error: string): AccountAddedFailureActionType => ({
     type: ACCOUNT_ADDED_FAILURE,
     payload: error
 });
@@ -42,4 +46,14 @@ export const activateAccountSuccess = (message: string): ActivateAccountSuccessA
 export const activateAccountFailure = (error: string): ActivateAccountFailureActionType => ({
     type: ACTIVATE_ACCOUNT_FAILURE,
     payload: error
+});
+
+export const deleteAccountSuccess = (message: string): AccountDeletedSuccessActionType => ({
+    type: ACCOUNT_DELETED_SUCCESS,
+    payload: message 
+});
+
+export const deleteAccountFailure = (error: string): AccountDeletedFailureActionType => ({
+    type: ACCOUNT_DELETED_FAILURE,
+    payload: error 
 });

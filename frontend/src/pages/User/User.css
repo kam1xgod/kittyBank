@@ -29,3 +29,13 @@
 .a {
     color: black;
 }
+
+.card-deck {
+  display: grid;
+}
+
+@media screen {
+  .card-deck {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

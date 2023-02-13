@@ -4,7 +4,7 @@ export type Account = {
     id: number
     number: string
     balance: number
-    currency: string
+    currency: Partial<Currency> 
     lastTransactionDate: string
     type: string
     creditLimit: number
@@ -24,6 +24,13 @@ export type Account = {
     code: string
 }
 
+export type Currency = {
+  id: number
+  name: string
+  symbol: string
+  accountNumbers: string
+}
+
 export type SavingPlan = {
     id: number
     canWithdraw: boolean
@@ -34,6 +41,7 @@ export type SavingPlan = {
     max: number
     years: number
     percentage: number
+    imageUrl: string
 }
 
 export type Card = {
@@ -94,6 +102,8 @@ export type CreditError = {
 export type CreditRequest = {
     id: number
     mail: string
+    desiredLimit: number
+    currency: Partial<Currency>
 }
 
 export type User = {

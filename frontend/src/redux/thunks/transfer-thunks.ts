@@ -24,7 +24,7 @@ export const addTransfer = (data: FormData, history: any) => async (dispatch: Di
     try {
         dispatch(showLoader());
         const response = await RequestService.post("/transfer/new", data, true, "multipart/form-data");
-        history.push("/transfer/finalize");
+        // history.push("/transfer/finalize");
         // localStorage.removeItem()
         dispatch(transferAddedSuccess(response.data));
     } catch (error) {

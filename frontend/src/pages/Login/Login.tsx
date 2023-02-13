@@ -78,7 +78,6 @@ const Login: FC<RouteComponentProps<{ code: string }>> = ({match}) => {
                 </div>
                 <div className="col-md-6">
                     <div className="mt-5">
-                        <p>asd</p>
                         {/* todo: may be some images here? */}
                     </div>
                 </div>

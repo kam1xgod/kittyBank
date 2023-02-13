@@ -2,7 +2,7 @@ package com.kami.study.finalProject.service.persistence.impl;
 
 
 import com.kami.study.finalProject.exception.ApiRequestException;
-import com.kami.study.finalProject.model.User;
+import com.kami.study.finalProject.model.Users;
 import com.kami.study.finalProject.repository.UserRepository;
 import com.kami.study.finalProject.service.persistence.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,33 +23,33 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
     @Override
-    public List<User> findAll() {
+    public List<Users> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Optional<User> findById(Long id) {
+    public Optional<Users> findById(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public List<User> delete(User object) {
+    public List<Users> delete(Users object) {
         repository.delete(object);
         return repository.findAll();
     }
 
     @Override
-    public User create(User object) {
+    public Users create(Users object) {
         return repository.save(object);
     }
 
     @Override
-    public User update(User object) {
+    public Users update(Users object) {
         return repository.save(object);
     }
 
     @Override
-    public User findUserByEmail(String mail) {
+    public Users findUserByEmail(String mail) {
         return repository.findByMail(mail)
                 .orElseThrow(() -> new ApiRequestException("Email not found.", HttpStatus.NOT_FOUND));
     }

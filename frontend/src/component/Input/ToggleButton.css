@@ -1,0 +1,8 @@
+.toggle-button {
+    background-color: #43506C;
+    width: max-content;
+    border-radius: 30px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }

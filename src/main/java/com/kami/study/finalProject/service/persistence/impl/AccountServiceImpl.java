@@ -90,6 +90,16 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public String delete(Long userId, Long accountId) {
+        Account account = findById(accountId).orElseThrow(() -> new ApiRequestException("There's no account with this card number", HttpStatus.BAD_REQUEST)); 
+        if (accountRepository.findByOwner_Id(userId).contains(account)) {
+          delete(account);
+      return "Account was successfully deleted.";
+    }
+        return "Account wasn't deleted. Probably, It's not your account.";
+  }
+
+    @Override
     public Account update(Account account) {
         return accountRepository.save(account);
     }

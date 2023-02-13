@@ -27,9 +27,9 @@ services:
     build: ./
     # Here we are providing name for our image.
     container_name: 'sbt_final_back'
-    # And ports. Because in most systems 8080 doesn't belong to anyone - we can use them.
     volumes:
       - ./backend:/app/backend
+    # And ports. Because in most systems 8080 doesn't belong to anyone - we can use them.
     ports:
       - '8080:8080'
 

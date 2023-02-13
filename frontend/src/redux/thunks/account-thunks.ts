@@ -6,7 +6,9 @@ import {
     accountAddedFailure,
     accountAddedSuccess,
     activateAccountSuccess,
-    activateAccountFailure
+    activateAccountFailure,
+    deleteAccountSuccess,
+    deleteAccountFailure
 } from "../actions/account-actions";
 import RequestService from '../../utils/request-service';
 import { showLoader } from "../actions/auth-actions";
@@ -35,7 +37,7 @@ export const addAccount = (data: FormData, history: any) => async (dispatch: Dis
         dispatch(accountAddedSuccess(response.data));
     } catch (error) {
         // @ts-ignore
-        dispatch(accountAddedFailure(error.response?.data));
+        dispatch(accountAddedFailure(error.response.data));
     }
 };
 
@@ -52,5 +54,15 @@ export const activateAccount = (code: string) => async (dispatch: Dispatch) => {
     } catch (error) {
         // @ts-ignore
         dispatch(activateAccountFailure(error.response.data));
+    }
+};
+
+export const deleteAccount = (id: string) => async (dispatch: Dispatch) => {
+    try {
+        const response = await RequestService.delete("/account/delete/" + id, true);
+        dispatch(deleteAccountSuccess(response.data));
+    } catch (error) {
+        // @ts-ignore
+        dispatch(deleteAccountFailure(error.response.data));
     }
 };

@@ -24,7 +24,7 @@ export const creditAddedSuccess = (credit: Credit): CreditAddedSuccessActionType
     payload: credit
 });
 
-export const creditAddedFailure = (error: CreditError): CreditAddedFailureActionType => ({
+export const creditAddedFailure = (error: string): CreditAddedFailureActionType => ({
     type: CREDIT_ADDED_FAILURE,
     payload: error
 });

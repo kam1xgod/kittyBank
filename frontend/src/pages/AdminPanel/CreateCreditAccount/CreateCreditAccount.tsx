@@ -7,25 +7,31 @@ import Spinner from "../../../component/Spinner/Spinner";
 import { AppStateType } from "../../../redux/reducers/root-reducer";
 import { addAccount } from "../../../redux/thunks/account-thunks";
 import { fetchCreditRequests } from "../../../redux/thunks/admin-thunks";
-import { Account, AccountError, CreditRequest } from "../../../types/types";
-import { currencyList, paymentSystemList } from "../../../utils/constants/types";
+import { fetchCurrencyInfo } from "../../../redux/thunks/currency-thunks";
+import { Account, AccountError, CreditRequest, Currency } from "../../../types/types";
+import { paymentSystemList } from "../../../utils/constants/types";
 
 const CreateCreditAccount: FC<RouteComponentProps<{ mail: string }>> = ({ match }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const accountData: Partial<Account> = useSelector((state: AppStateType) => state.admin.account);
+    const currencies: Array<Currency> = useSelector((state: AppStateType) => state.currency.currencies)
     const loading: boolean = useSelector((state: AppStateType) => state.admin.isLoaded);
-    const errors: Partial<AccountError> = useSelector((state: AppStateType) => state.account.error);
+    const errors: string = useSelector((state: AppStateType) => state.account.error);
 
-    const [currency, setCurrency] = useState<string | undefined>(accountData.currency);
+    const [currency, setCurrency] = useState<string | undefined>(accountData.currency?.name);
     const [paymentSystem, setPaymentSystem] = useState<string | undefined>(accountData.paymentSystem);
     const [creditLimit, setCreditLimit] = useState<number | undefined>(accountData.creditLimit)
     const [percentage, setPercentage] = useState<number | undefined>(accountData.percentage);
 
-    const {
-        percentageError,
-        creditLimitError
-    } = errors;
+  useEffect(() => {
+    dispatch(fetchCurrencyInfo())
+  }, [dispatch])
+
+    // const {
+    //     percentageError,
+    //     creditLimitError
+    // } = errors;
 
     const onFormSubmit = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
@@ -53,7 +59,6 @@ const CreateCreditAccount: FC<RouteComponentProps<{ mail: string }>> = ({ match 
                 Open account
             </h4>
             <br />
-            <p className="">Note: if you want to create credit or savings account go to Request new or Saving plans tabs.</p>
             <div className="container mt-5 pb-5">
                 <form onSubmit={onFormSubmit}>
                     <div className="row">
@@ -64,9 +69,9 @@ const CreateCreditAccount: FC<RouteComponentProps<{ mail: string }>> = ({ match 
                                     <select value={currency} onChange={(event) => setCurrency(event.target.value)}>
                                         <option className="form-control">---</option>
                                         {
-                                            currencyList.map((currency) => {
+                                            currencies.map((currency) => {
                                                 return (
-                                                    <option className="form-control">{currency}</option>
+                                                    <option className="form-control">{currency.name}</option>
                                                 );
                                             })}
                                     </select>
@@ -98,7 +103,7 @@ const CreateCreditAccount: FC<RouteComponentProps<{ mail: string }>> = ({ match 
                                         name="creditLimit"
                                         placeholder="Enter credit limit"
                                         onChange={(event) => setCreditLimit(parseInt(event.target.value))} />
-                                    <div className="invalid-feedback">{creditLimitError}</div>
+{ /*                                    <div className="invalid-feedback">{creditLimitError}</div> */}
                                 </div>
                             </div>
                             <div className="form-group row">
@@ -111,7 +116,7 @@ const CreateCreditAccount: FC<RouteComponentProps<{ mail: string }>> = ({ match 
                                         name="percentage"
                                         placeholder="Enter percentage"
                                         onChange={(event) => setPercentage(parseInt(event.target.value))} />
-                                    <div className="invalid-feedback">{percentageError}</div>
+{ /*                                    <div className="invalid-feedback">{percentageError}</div> */}
                                 </div>
                             </div>
                             <button type="submit" className="btn btn-primary btn-lg px-5 float-right">

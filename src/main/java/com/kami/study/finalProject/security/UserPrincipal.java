@@ -1,6 +1,6 @@
 package com.kami.study.finalProject.security;
 
-import com.kami.study.finalProject.model.User;
+import com.kami.study.finalProject.model.Users;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,13 +21,13 @@ public class UserPrincipal implements UserDetails, OAuth2User {
     private final Collection<? extends GrantedAuthority> authorities;
     private Map<String, Object> attributes;
 
-    public static UserPrincipal create(User user) {
+    public static UserPrincipal create(Users user) {
         String userRole = user.getRole().toString();
         List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(userRole));
         return new UserPrincipal(user.getId(), user.getMail(), user.getPassword(), authorities);
     }
 
-    public static UserPrincipal create(User user, Map<String, Object> attributes) {
+    public static UserPrincipal create(Users user, Map<String, Object> attributes) {
         UserPrincipal userPrincipal = UserPrincipal.create(user);
         userPrincipal.setAttributes(attributes);
         return userPrincipal;

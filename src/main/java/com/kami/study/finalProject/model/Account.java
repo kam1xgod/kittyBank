@@ -44,7 +44,7 @@ public class Account {
   @Builder.Default
   private AccountType type = AccountType.CARD;
 
-  @ManyToOne
+  @OneToOne
   @JoinColumn(name = "currency")
   private Currency currency;
 
@@ -57,7 +57,7 @@ public class Account {
 
   @ManyToOne
   @JoinColumn(name = "owner")
-  private User owner;
+  private Users owner;
 
   @Nullable
   @Builder.Default

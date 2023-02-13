@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -28,8 +29,9 @@ public class CreditAccountRequest {
   private Double desiredLimit;
 
   @ManyToOne
+  @JoinColumn(name = "currency")
   private Currency currency;
 
   @ManyToOne
-  private User user;
+  private Users user;
 }

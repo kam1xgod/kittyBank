@@ -5,10 +5,10 @@ import PageLoader from '../../../component/PageLoader/PageLoader'
 import { AppStateType } from '../../../redux/reducers/root-reducer'
 // TODO: create new thunks for fetching User's credit accounts
 import { fetchUserCreditAccounts } from '../../../redux/thunks/account-thunks'
-import { Credit, CreditError, Account } from '../../../types/types'
+import { Credit, CreditError, Account, Currency } from '../../../types/types'
 import { validateAmount } from '../../../utils/input-validators'
-import { currencyList } from '../../../utils/constants/types'
 import { addCredit } from '../../../redux/thunks/credit-thunks'
+import { fetchCurrencyInfo } from '../../../redux/thunks/currency-thunks'
 
 const CreateCredit: FC = () => {
   const dispatch = useDispatch()
@@ -19,6 +19,9 @@ const CreateCredit: FC = () => {
   )
   const credits: Array<Credit> = useSelector(
     (state: AppStateType) => state.credit.credits
+  )
+  const currencies: Array<Currency> = useSelector(
+    (state: AppStateType) => state.currency.currencies
   )
   const userAccountsData: Array<Account> = useSelector(
     (state: AppStateType) => state.account.accounts
@@ -42,6 +45,10 @@ const CreateCredit: FC = () => {
   useEffect(() => {
     dispatch(fetchUserCreditAccounts())
   }, [])
+
+  useEffect(() => {
+    dispatch(fetchCurrencyInfo())
+  }, [dispatch])
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
@@ -121,7 +128,7 @@ const CreateCredit: FC = () => {
                     setAmount(parseFloat(event.target.value))
                   }
                 />
-                <div className='invalid-feedback'>{amountError}</div>
+                <div className='invalid-feedback'>{validateAmountError}</div>
               </div>
             </div>
             <div className='form-group row'>
@@ -131,9 +138,9 @@ const CreateCredit: FC = () => {
                   value={currency}
                   onChange={(event) => setCurrency(event.target.value)}
                 >
-                  <option className='form-control'>---</option>
-                  {currencyList.map((currency) => {
-                    return <option className='form-control'>{currency}</option>
+                    <option disabled className='form-control'>Currency</option>
+                  {currencies.map((currency) => {
+                    return <option key={currency.id} className='form-control'>{currency.name}</option>
                   })}
                 </select>
               </div>

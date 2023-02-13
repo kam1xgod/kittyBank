@@ -2,7 +2,7 @@ package com.kami.study.finalProject.repository;
 
 import com.kami.study.finalProject.model.Account;
 import com.kami.study.finalProject.model.Card;
-import com.kami.study.finalProject.model.User;
+import com.kami.study.finalProject.model.Users;
 import com.kami.study.finalProject.model.enums.AccountStatus;
 import com.kami.study.finalProject.model.enums.AccountType;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,7 +17,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     Optional<Account> findByCardId(Long cardId);
 
     Optional<Account> findFirstByOwnerIdOrderByIdDesc(Long userId);
-    Optional<Account> findFirstByOwner(User user);
+    Optional<Account> findFirstByOwner(Users user);
 
     Optional<Account> findByCard_Number(String cardNumber);
 

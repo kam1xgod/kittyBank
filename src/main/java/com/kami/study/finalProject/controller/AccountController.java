@@ -29,4 +29,9 @@ public class AccountController {
     public ResponseEntity<String> activateEmailCode(@PathVariable String code) {
         return ResponseEntity.ok(accountMapper.activateAccount(code));
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteAccount(@AuthenticationPrincipal UserPrincipal user, @PathVariable Long id) {
+    return ResponseEntity.ok(accountMapper.delete(user.getId(), id));
+  }
 }

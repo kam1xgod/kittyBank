@@ -30,4 +30,6 @@ public interface AccountService extends DefaultService<Account> {
     void checkAllSavingAccounts();
 
     void checkAllCreditAccounts();
+
+    String delete(Long userId, Long accountId);
 }

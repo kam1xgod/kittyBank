@@ -1,7 +1,7 @@
 package com.kami.study.finalProject.repository;
 
 import com.kami.study.finalProject.model.Card;
-import com.kami.study.finalProject.model.User;
+import com.kami.study.finalProject.model.Users;
 import com.kami.study.finalProject.model.enums.CardType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

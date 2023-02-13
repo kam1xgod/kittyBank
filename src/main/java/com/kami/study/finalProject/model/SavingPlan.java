@@ -23,4 +23,5 @@ public class SavingPlan {
     private boolean capitalized;
     private Long min;
     private Long max;
+    private String imageUrl;
 }

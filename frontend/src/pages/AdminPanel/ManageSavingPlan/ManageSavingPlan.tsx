@@ -19,7 +19,8 @@ type InitialStateType = {
     closable: boolean,
     max: number,
     min: number,
-    percentage: number
+    percentage: number,
+    imageUrl: string
 };
 
 const ManageSavingPlan: FC<RouteComponentProps<{ id: string }>> = ({ match }) => {
@@ -37,7 +38,8 @@ const ManageSavingPlan: FC<RouteComponentProps<{ id: string }>> = ({ match }) =>
         closable: savingPlanData.closable as boolean,
         max: savingPlanData.max as number,
         min: savingPlanData.min as number,
-        percentage: savingPlanData.percentage as number
+        percentage: savingPlanData.percentage as number,
+        imageUrl: savingPlanData.imageUrl as string
     }
 
     const [{
@@ -48,7 +50,8 @@ const ManageSavingPlan: FC<RouteComponentProps<{ id: string }>> = ({ match }) =>
         closable,
         max,
         min,
-        percentage
+        percentage,
+        imageUrl
     }, setState] = useState(initialState);
 
     useEffect(() => {
@@ -162,6 +165,14 @@ const ManageSavingPlan: FC<RouteComponentProps<{ id: string }>> = ({ match }) =>
                                             type="text"
                                             value={years}
                                             name="years"
+                                            onChange={onInputChange} />
+                                    </div>
+                                    <div className="form-group row">
+                                        <label className="col-sm-5 col-form-label">Image url:</label>
+                                        <input
+                                            type="text"
+                                            value={imageUrl}
+                                            name="imageUrl"
                                             onChange={onInputChange} />
                                     </div>
                                 </div>

@@ -6,7 +6,7 @@ import com.kami.study.finalProject.DTO.auth.AuthenticationRequest;
 import com.kami.study.finalProject.DTO.auth.AuthenticationResponse;
 import com.kami.study.finalProject.DTO.user.UserResponse;
 import com.kami.study.finalProject.exception.InputFieldException;
-import com.kami.study.finalProject.model.User;
+import com.kami.study.finalProject.model.Users;
 import com.kami.study.finalProject.service.persistence.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -37,7 +37,7 @@ public class AuthenticationMapper {
         if (bindingResult.hasErrors()) {
             throw new InputFieldException(bindingResult);
         }
-        User user = commonMapper.convert(registrationRequest, User.class);
+        Users user = commonMapper.convert(registrationRequest, Users.class);
         return authenticationService.registerUser(user, registrationRequest.getPassword2());
     }
 

@@ -5,7 +5,7 @@ import "./Footer.css";
 
 const Footer: FC = () => {
     return (
-        <footer className="page-footer p-5 bg-black text-white">
+        <footer className="page-footer p-2 bg-black text-white">
             <div className="container">
                 <div className="d-flex justify-content-between">
                     <div className="footer-left">
@@ -20,10 +20,10 @@ const Footer: FC = () => {
                             <i className="fab fa-github fa-2x mr-3" style={{ color: "#EF484C" }}></i>
                         </a>
                         <a href="https://t.me/kam1xgod">
-                            <i className="fab fa-instagram fa-2x mr-3" style={{ color: "#EF484C" }}></i>
+                            <i className="fab fa-telegram fa-2x mr-3" style={{ color: "#EF484C" }}></i>
                         </a>
                         <a href="https://instagram.com/">
-                            <i className="fab fa-telegram fa-2x mr-3" style={{ color: "#EF484C" }}></i>
+                            <i className="fab fa-instagram fa-2x mr-3" style={{ color: "#EF484C" }}></i>
                         </a>
                         <p>(please, don't)</p>
                     </div>

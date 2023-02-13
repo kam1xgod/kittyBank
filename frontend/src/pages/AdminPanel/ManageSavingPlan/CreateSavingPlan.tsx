@@ -19,7 +19,8 @@ type InitialStateType = {
     closable: boolean,
     max: number,
     min: number,
-    percentage: number
+    percentage: number,
+    imageUrl: string
 };
 
 const CreateSavingPlan: FC = () => {
@@ -36,7 +37,8 @@ const CreateSavingPlan: FC = () => {
         closable: false,
         max: 0.0,
         min: 0.0,
-        percentage: 0
+        percentage: 0,
+        imageUrl: ""
     }
 
     const [{
@@ -47,7 +49,8 @@ const CreateSavingPlan: FC = () => {
         closable,
         max,
         min,
-        percentage
+        percentage,
+        imageUrl
     }, setState] = useState(initialState);
 
     useEffect(() => {
@@ -64,7 +67,7 @@ const CreateSavingPlan: FC = () => {
         const bodyFormData: FormData = new FormData();
         bodyFormData.append("plan", new Blob([JSON.stringify({
             years, canDeposit, canWithdraw, capitalized,
-            closable, max, min, percentage
+            closable, max, min, percentage, imageUrl
         })], { type: "application/json" }));
 
         dispatch(addSavingPlan(bodyFormData, history));
@@ -152,6 +155,14 @@ const CreateSavingPlan: FC = () => {
                                             type="text"
                                             value={years}
                                             name="years"
+                                            onChange={onInputChange} />
+                                    </div>
+                                    <div className="form-group row">
+                                        <label className="col-sm-5 col-form-label">Image URL:</label>
+                                        <input
+                                            type="text"
+                                            value={imageUrl}
+                                            name="imageUrl"
                                             onChange={onInputChange} />
                                     </div>
                                 </div>

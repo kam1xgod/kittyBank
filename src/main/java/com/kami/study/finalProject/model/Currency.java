@@ -24,7 +24,7 @@ public class Currency {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  private String accountNumbers;
   private String name;
   private String symbol;
-  private String accountNumbers;
 }

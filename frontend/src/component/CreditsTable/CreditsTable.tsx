@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
-
 import { Credit } from '../../types/types'
 import Spinner from '../Spinner/Spinner'
 import { Link } from 'react-router-dom'
@@ -12,7 +11,7 @@ type PropsType = {
   loading: boolean
 }
 
-const TransfersTable: FC<PropsType> = ({ loading, credits }) => {
+const CreditssTable: FC<PropsType> = ({ loading, credits }) => {
   return (
     <div className='container'>
       {loading ? (
@@ -52,39 +51,39 @@ const TransfersTable: FC<PropsType> = ({ loading, credits }) => {
                     <th>
                       {credit.status === 'CLOSED'
                         ? 'Closed'
-                        : credit.status === 'OVERDUE' 
-                        ? 'Overdue'
-                        : credit.daysLeft}
+                        : credit.status === 'OVERDUE'
+                          ? 'Overdue'
+                          : credit.daysLeft}
                     </th>
 
                     {credit.status === 'CLOSED' ?
-                    ( <th>
-                      {credit.date}
-                    </th> )
-                    :
-                    localStorage.getItem('role') === 'ADMIN' ? (
-                      <th>
-                        <Link
-                          to={{
-                            pathname: `/admin/credits/${credit.id}`,
-                            state: credit,
-                          }}
-                        >
-                          Show more
-                        </Link>
-                      </th>
-                    ) : (
-                      <th>
-                        <Link
-                          to={{
-                            pathname: `/user/credits/${credit.id}/info`,
-                            state: credit,
-                          }}
-                        >
-                          Show more
-                        </Link>
-                      </th>
-                    )}
+                      (<th>
+                        {credit.date}
+                      </th>)
+                      :
+                      localStorage.getItem('role') === 'ADMIN' ? (
+                        <th>
+                          <Link
+                            to={{
+                              pathname: `/admin/credits/${credit.id}/info`,
+                              state: credit,
+                            }}
+                          >
+                            Show more
+                          </Link>
+                        </th>
+                      ) : (
+                        <th>
+                          <Link
+                            to={{
+                              pathname: `/user/credits/${credit.id}/info`,
+                              state: credit,
+                            }}
+                          >
+                            Show more
+                          </Link>
+                        </th>
+                      )}
                   </tr>
                 )
               })}
@@ -96,4 +95,4 @@ const TransfersTable: FC<PropsType> = ({ loading, credits }) => {
   )
 }
 
-export default TransfersTable
+export default CreditssTable

@@ -4,7 +4,7 @@ import com.kami.study.finalProject.exception.ApiRequestException;
 import com.kami.study.finalProject.model.Account;
 import com.kami.study.finalProject.model.Card;
 import com.kami.study.finalProject.model.Transfer;
-import com.kami.study.finalProject.model.User;
+import com.kami.study.finalProject.model.Users;
 import com.kami.study.finalProject.repository.AccountRepository;
 import com.kami.study.finalProject.repository.CardRepository;
 import com.kami.study.finalProject.repository.TransferRepository;
@@ -92,7 +92,7 @@ public class TransferServiceImpl implements TransferService {
   }
 
   @Override
-  public Transfer create(Double amount, User sender, User recipient) {
+  public Transfer create(Double amount, Users sender, Users recipient) {
     Account senderAccount = accountRepository.findFirstByOwner(sender)
         .orElseThrow(() -> new ApiRequestException("This user doesn't have any account.", HttpStatus.BAD_REQUEST));
 
